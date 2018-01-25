@@ -1,6 +1,6 @@
 # reg
 
-> A Vue.js project
+> A Vue.js project ecommerce form template
 
 ## Build Setup
 

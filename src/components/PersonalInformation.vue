@@ -7,21 +7,21 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="first-name">First Name</label>
-                        <input type="text" v-model="state.personalInfo.firstName" class="form-control" id="first-name"
+                        <input type="text" v-model="state.personalInfo.firstName" @keyup="updateState" class="form-control" id="first-name"
                                placeholder="Enter your first name" required>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="middle-name">Middle Name</label>
-                        <input type="text" v-model="state.personalInfo.middleName" class="form-control" id="middle-name"
+                        <input type="text" v-model="state.personalInfo.middleName" @keyup="updateState" class="form-control" id="middle-name"
                                placeholder="Enter your middle name" required>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="last-name">Last Name</label>
-                        <input type="text" v-model="state.personalInfo.lastName" class="form-control" id="last-name"
+                        <input type="text" v-model="state.personalInfo.lastName" @keyup="updateState" class="form-control" id="last-name"
                                placeholder="Enter your last name" required>
                     </div>
                 </div>
@@ -30,14 +30,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" v-model="state.personalInfo.email" class="form-control" id="email"
+                        <input type="email" v-model="state.personalInfo.email" @keyup="updateState" class="form-control" id="email"
                                placeholder="Enter your email address" required>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="text" v-model="state.personalInfo.phone" class="form-control" id="phone"
+                        <input type="text" v-model="state.personalInfo.phone" @keyup="updateState" class="form-control" id="phone"
                                placeholder="Enter your phone number" required>
                     </div>
                 </div>
