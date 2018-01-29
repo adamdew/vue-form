@@ -69,8 +69,13 @@ export const store = new Vuex.Store({
                 city: newState.personalInfo.city,
                 country: newState.personalInfo.country,
                 state: newState.personalInfo.state,
-                zip: newState.personalInfo.zip
+                zip: newState.personalInfo.zip,
+                panelId : newState.personalInfo.panelId
             }
+        },
+        updatePersonalInfoNew(state, newState, element){
+            console.log(element);
+            state.personalInfo[element] = newState.personalInfo[element];
         },
         updateCompanyInfo(state, newState){
             state.companyInfo = {

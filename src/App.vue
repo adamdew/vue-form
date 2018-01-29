@@ -1,5 +1,10 @@
 <template>
     <div id="app">
+        <div v-if="nameIsSet" class="container">
+            <div class="alert alert-info" role="alert">
+                Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName }}, {{ state.personalInfo.degree }}</strong>
+            </div>
+        </div>
         <transition name="component-fade" mode="out-in">
             <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"  />
             <CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId" />
@@ -21,11 +26,26 @@
             CompanyInformation,
             PriceSheet
         },
+        data: function(){
+            return {
+                nameSet: false
+            }
+        },
         computed: mapGetters({
-            state: 'getState'
+            state: 'getState',
         }),
         methods: {
-
+            nameIsSet: function () {
+                if(this.state.personalInfo.firstName == ''){
+                   this.nameSet = false;
+                } else if(this.state.personalInfo.middleName == ''){
+                    this.nameSet = false;
+                } else if(this.state.personalInfo.lastName == ''){
+                    this.nameSet = false;
+                } else {
+                    this.nameSet = true;
+                }
+            },
         }
     }
 </script>

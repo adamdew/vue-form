@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <div class="form-buttons">
         <div class="row">
             <div class="col-sm-12">
-                <button style='float:right' class="btn btn-info" @click="formSectionComplete">Next</button>
+                <button style='float:right' class="btn btn-info" @click="nextPage">Next</button>
                 <button style='float:left' class="btn btn-default" @click="previousPage">Previous</button>
             </div>
         </div>
@@ -27,3 +27,8 @@
         }
     }
 </script>
+<style>
+    .form-buttons {
+        margin-top: 10px;
+    }
+</style>

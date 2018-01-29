@@ -1,85 +1,162 @@
 <template>
     <div class="container">
-        <!--<div class="form-section"></div>-->
-        <h2 class="form-section-head">Personal Information</h2>
-        <div class="form-section-body">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="first-name">First Name</label>
-                        <input type="text" v-model="state.personalInfo.firstName" @keyup="updateState" class="form-control" id="first-name"
-                               placeholder="Enter your first name" required>
+
+        <div class="form-section">
+            <h2 class="form-section-head">Personal Information</h2>
+            <div class="form-section-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="first-name"
+                                label="First Name"
+                                stateName="firstName"
+                                type="text"
+                                placeholder="Enter your first name">
+                        </FormInput>
+                    </div>
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="middle-name"
+                                label="Middle Name"
+                                stateName="middleName"
+                                type="text"
+                                placeholder="Enter your middle name">
+                        </FormInput>
+                    </div>
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="last-name"
+                                label="Last Name"
+                                stateName="lastName"
+                                type="text"
+                                placeholder="Enter your last name">
+                        </FormInput>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="middle-name">Middle Name</label>
-                        <input type="text" v-model="state.personalInfo.middleName" @keyup="updateState" class="form-control" id="middle-name"
-                               placeholder="Enter your middle name" required>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <FormInput
+                                compId="degree"
+                                label="Degree"
+                                stateName="degree"
+                                type="text"
+                                placeholder="Enter your primary degree">
+                        </FormInput>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="last-name">Last Name</label>
-                        <input type="text" v-model="state.personalInfo.lastName" @keyup="updateState" class="form-control" id="last-name"
-                               placeholder="Enter your last name" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" v-model="state.personalInfo.email" @keyup="updateState" class="form-control" id="email"
-                               placeholder="Enter your email address" required>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" v-model="state.personalInfo.phone" @keyup="updateState" class="form-control" id="phone"
-                               placeholder="Enter your phone number" required>
+                    <div class="col-sm-6">
+                        <FormInput
+                                compId="phone"
+                                label="Phone Number"
+                                stateName="phone"
+                                type="text"
+                                placeholder="Enter your primary phone number">
+                        </FormInput>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="form-buttons">
-            <div class="row">
-                <div class="col-sm-12">
-                    <button style='float:right' class="btn btn-info" @click="formSectionComplete">Next</button>
-                    <button style='float:left' class="btn btn-default" @click="previousPage">Previous</button>
+        <div class="form-section">
+            <h2 class="form-section-head">Contact Information</h2>
+            <div class="form-section-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <FormInput
+                                compId="company"
+                                label="Organization/Company"
+                                stateName="company"
+                                type="text"
+                                placeholder="Enter your organization's name">
+                        </FormInput>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <FormInput
+                                compId="address1"
+                                label="Street Line 1"
+                                stateName="address1"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <FormInput
+                                compId="address2"
+                                label="Street Line 2"
+                                stateName="address2"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <FormInput
+                                compId="city"
+                                label="City"
+                                stateName="city"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="city"
+                                label="City"
+                                stateName="city"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="city"
+                                label="City"
+                                stateName="city"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
+                    <div class="col-sm-4">
+                        <FormInput
+                                compId="city"
+                                label="City"
+                                stateName="city"
+                                type="text"
+                                placeholder="">
+                        </FormInput>
+                    </div>
                 </div>
             </div>
         </div>
+        <FormControl/>
     </div>
 </template>
 
 <script>
 
+    import FormControl from './FormControl'
+    import FormInput from './FormInput'
     import {mapGetters} from 'vuex';
 
     export default {
         computed: mapGetters({
             state: 'getState'
         }),
-        methods: {
-            updateState() {
-                this.$store.commit('updatePersonalInfo', this.state);
-            },
-            nextPage() {
-                this.$store.commit('nextPage');
-            },
-            formSectionComplete() {
-                this.updateState();
-                this.nextPage();
-            },
-            previousPage() {
-                this.$store.commit('previousPage');
-            },
-        }
+        components: {
+            FormControl,
+            FormInput
+        },
     }
 </script>
 <style>
+    .form-section {
+        margin-top: 10px;
+    }
 
     .form-section-head {
         /*border: solid 1px grey;*/
@@ -96,9 +173,5 @@
         border-radius: 0 0 4px 4px;
         border-top: 1px solid transparent;
 
-    }
-
-    .form-buttons {
-        margin-top: 10px;
     }
 </style>

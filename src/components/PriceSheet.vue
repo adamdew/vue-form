@@ -69,8 +69,6 @@
                 <td>${{ getPriceData('Coding and Reimbursement', 'Ophthalmic Nurse', 'earlybird') }}</td>
                 <td>${{ getPriceData('Coding and Reimbursement', 'Ophthalmic Nurse', 'regular') }}</td>
             </tr>
-
-
         </table>
         <div class="row">
             <div class="col-sm-12">
