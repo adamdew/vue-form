@@ -45,11 +45,11 @@
                     </div>
                     <div class="col-sm-6">
                         <FormInput
-                                compId="phone"
-                                label="Phone Number"
-                                stateName="phone"
-                                type="text"
-                                placeholder="Enter your primary phone number" required="required">
+                                compId="email"
+                                label="Email Address"
+                                stateName="email"
+                                type="email"
+                                placeholder="Enter your primary email" required="required">
                         </FormInput>
                     </div>
                 </div>
@@ -139,6 +139,17 @@
                                 stateName="zip"
                                 type="text"
                                 placeholder="" required="required|numeric">
+                        </FormInput>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <FormInput
+                                compId="phone"
+                                label="Phone"
+                                stateName="phone"
+                                type="text"
+                                placeholder="Enter your primary phone number" required="required">
                         </FormInput>
                     </div>
                 </div>

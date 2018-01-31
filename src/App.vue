@@ -6,19 +6,35 @@
                     Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName
                     }}, {{ state.personalInfo.degree }}</strong>
                 </div>
+
             </div>
         </transition>
-        <div class="row">
+        <div v-if="state.items.sessionSelection.PRODUCTID > 0" class="row">
             <div class="col-md-8">
+                <transition name="component-fade" mode="out-in">
+                    <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
+                    <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
+                </transition>
+                <FormControl/>
+            </div>
+            <div class="col-md-4">
+                <div class="container review-container" >
+                    <FormReceipt></FormReceipt>
+                    <div v-if="nameIsSet">
+                        <hr/>
+                        <UserInfo></UserInfo>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else class="row">
+            <div class="col-md-12">
                 <transition name="component-fade" mode="out-in">
                     <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
                     <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
                     <CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId"/>
                 </transition>
                 <FormControl/>
-            </div>
-            <div class="col-md-4">
-                <FormReceipt></FormReceipt>
             </div>
         </div>
 
@@ -31,6 +47,7 @@
     import PriceSheet from './components/PriceSheet'
     import FormReceipt from './components/FormReceipt'
     import FormControl from './components/FormControl'
+    import UserInfo from './components/UserInfo'
     import {mapGetters} from 'vuex';
 
     export default {
@@ -40,6 +57,7 @@
             CompanyInformation,
             PriceSheet,
             FormReceipt,
+            UserInfo,
             FormControl
         },
         computed: {
@@ -86,7 +104,7 @@
         border-radius: 4px 4px 0 0;
         padding: 10px;
         border-bottom: 1px solid transparent;
-        background-color: #dddddd;
+        background-color: #dddddd40;
         margin: 0;
     }
 
@@ -95,5 +113,14 @@
         border: solid 1px #dddddd;
         border-radius: 0 0 4px 4px;
         border-top: 1px solid transparent;
+    }
+
+    .review-container {
+        background-color: #dddddd40;
+        border-radius: 4px;
+    }
+
+    hr {
+        color:black;
     }
 </style>

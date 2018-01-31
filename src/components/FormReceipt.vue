@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="table receipt-table">
-            <h2 style="text-align: center">Your Items</h2>
+            <h3>Items</h3>
             <tr>
                 <th>Product Name</th>
                 <th>Price</th>
@@ -11,6 +11,10 @@
                     {{ state.items.sessionSelection.info[0].description}}
                 </td>
                 <td>${{ state.items.sessionSelection.info[0].price}}</td>
+            </tr>
+            <tr>
+                <td><strong>Total:</strong></td>
+                <td><strong>${{ state.items.sessionSelection.info[0].price}}</strong></td>
             </tr>
         </div>
     </div>
@@ -35,8 +39,6 @@
 
         margin-top: 10px;
         padding: 10px;
-        border: solid 1px #dddddd;
-        border-radius: 4px;
-        background-color: #dddddd2b;
+
     }
 </style>
