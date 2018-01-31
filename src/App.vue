@@ -1,15 +1,27 @@
 <template>
-    <div id="app">
-        <div v-if="nameIsSet" class="container">
-            <div class="alert alert-info" role="alert">
-                Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName }}, {{ state.personalInfo.degree }}</strong>
+    <div id="app" class="container">
+        <transition name="component-fade" mode="out-in">
+            <div v-if="nameIsSet">
+                <div class="alert alert-info" role="alert">
+                    Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName
+                    }}, {{ state.personalInfo.degree }}</strong>
+                </div>
+            </div>
+        </transition>
+        <div class="row">
+            <div class="col-md-8">
+                <transition name="component-fade" mode="out-in">
+                    <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
+                    <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
+                    <CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId"/>
+                </transition>
+                <FormControl/>
+            </div>
+            <div class="col-md-4">
+                <FormReceipt></FormReceipt>
             </div>
         </div>
-        <transition name="component-fade" mode="out-in">
-            <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"  />
-            <CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId" />
-            <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId" />
-        </transition>
+
     </div>
 </template>
 
@@ -17,36 +29,36 @@
     import PersonalInformation from './components/PersonalInformation'
     import CompanyInformation from './components/CompanyInformation'
     import PriceSheet from './components/PriceSheet'
-
+    import FormReceipt from './components/FormReceipt'
+    import FormControl from './components/FormControl'
     import {mapGetters} from 'vuex';
+
     export default {
         name: 'App',
         components: {
             PersonalInformation,
             CompanyInformation,
-            PriceSheet
+            PriceSheet,
+            FormReceipt,
+            FormControl
         },
-        data: function(){
-            return {
-                nameSet: false
+        computed: {
+            ...mapGetters({
+                state: 'getState',
+            }),
+            nameIsSet: function () {
+                if (this.state.personalInfo.firstName == '') {
+                    return false;
+                } else if (this.state.personalInfo.degree == '') {
+                    return false;
+                } else if (this.state.personalInfo.lastName == '') {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         },
-        computed: mapGetters({
-            state: 'getState',
-        }),
-        methods: {
-            nameIsSet: function () {
-                if(this.state.personalInfo.firstName == ''){
-                   this.nameSet = false;
-                } else if(this.state.personalInfo.middleName == ''){
-                    this.nameSet = false;
-                } else if(this.state.personalInfo.lastName == ''){
-                    this.nameSet = false;
-                } else {
-                    this.nameSet = true;
-                }
-            },
-        }
+        methods: {}
     }
 </script>
 
@@ -55,11 +67,33 @@
         width: 100%;
         margin: 0 auto;
     }
+
     .component-fade-enter-active, .component-fade-leave-active {
         transition: opacity .2s ease;
     }
+
     .component-fade-enter, .component-fade-leave-to
-        /* .component-fade-leave-active below version 2.1.8 */ {
+        /* .component-fade-leave-active below version 2.1.8 */
+    {
         opacity: 0;
+    }
+
+    .form-section {
+        margin-top: 10px;
+    }
+
+    .form-section-head {
+        border-radius: 4px 4px 0 0;
+        padding: 10px;
+        border-bottom: 1px solid transparent;
+        background-color: #dddddd;
+        margin: 0;
+    }
+
+    .form-section-body {
+        padding: 10px;
+        border: solid 1px #dddddd;
+        border-radius: 0 0 4px 4px;
+        border-top: 1px solid transparent;
     }
 </style>

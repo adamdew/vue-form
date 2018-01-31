@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-
+    <div>
         <div class="form-section">
             <h2 class="form-section-head">Personal Information</h2>
             <div class="form-section-body">
@@ -11,7 +10,8 @@
                                 label="First Name"
                                 stateName="firstName"
                                 type="text"
-                                placeholder="Enter your first name">
+                                placeholder="Enter your first name"
+                                required="required|alpha">
                         </FormInput>
                     </div>
                     <div class="col-sm-4">
@@ -20,7 +20,7 @@
                                 label="Middle Name"
                                 stateName="middleName"
                                 type="text"
-                                placeholder="Enter your middle name">
+                                placeholder="Enter your middle name" required="notrequired">
                         </FormInput>
                     </div>
                     <div class="col-sm-4">
@@ -29,7 +29,7 @@
                                 label="Last Name"
                                 stateName="lastName"
                                 type="text"
-                                placeholder="Enter your last name">
+                                placeholder="Enter your last name" required="required|alpha">
                         </FormInput>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                 label="Degree"
                                 stateName="degree"
                                 type="text"
-                                placeholder="Enter your primary degree">
+                                placeholder="Enter your primary degree" required="required|alpha">
                         </FormInput>
                     </div>
                     <div class="col-sm-6">
@@ -49,7 +49,7 @@
                                 label="Phone Number"
                                 stateName="phone"
                                 type="text"
-                                placeholder="Enter your primary phone number">
+                                placeholder="Enter your primary phone number" required="required">
                         </FormInput>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                                 label="Organization/Company"
                                 stateName="company"
                                 type="text"
-                                placeholder="Enter your organization's name">
+                                placeholder="Enter your organization's name" required="notrequired">
                         </FormInput>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                                 label="Street Line 1"
                                 stateName="address1"
                                 type="text"
-                                placeholder="">
+                                placeholder="" required="required">
                         </FormInput>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                                 label="Street Line 2"
                                 stateName="address2"
                                 type="text"
-                                placeholder="">
+                                placeholder="" required="not required">
                         </FormInput>
                     </div>
                 </div>
@@ -98,49 +98,57 @@
                                 label="City"
                                 stateName="city"
                                 type="text"
-                                placeholder="">
+                                placeholder="" required="required">
                         </FormInput>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <FormInput
-                                compId="city"
-                                label="City"
-                                stateName="city"
-                                type="text"
-                                placeholder="">
-                        </FormInput>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <select class="custom-select" id="state" name="state" v-model="state.personalInfo.state"
+                                    @click="updateState('state')" v-validate="'required'">
+                                <option disabled value="">Please select one</option>
+                                <option v-for="item in state.stateList" :value="item.abbreviation">{{ item.name }}
+                                </option>
+                            </select>
+                            <div v-show="errors.has('state')" class="help-block alert alert-danger">
+                                <small> {{ errors.first('state') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select class="custom-select" id="country" name="country"
+                                    v-model="state.personalInfo.country" @click="updateState('country')"
+                                    v-validate="'required'">
+                                <option disabled value="">Please select one</option>
+                                <option v-for="item in state.countryList" :value="item.abbreviation">{{ item.name }}
+                                </option>
+                            </select>
+                            <div v-show="errors.has('country')" class="help-block alert alert-danger">
+                                <small> {{ errors.first('country') }}</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-4">
                         <FormInput
-                                compId="city"
-                                label="City"
-                                stateName="city"
+                                compId="zip"
+                                label="Zip/Postal Code"
+                                stateName="zip"
                                 type="text"
-                                placeholder="">
-                        </FormInput>
-                    </div>
-                    <div class="col-sm-4">
-                        <FormInput
-                                compId="city"
-                                label="City"
-                                stateName="city"
-                                type="text"
-                                placeholder="">
+                                placeholder="" required="required|numeric">
                         </FormInput>
                     </div>
                 </div>
             </div>
         </div>
-        <FormControl/>
     </div>
 </template>
 
 <script>
-
-    import FormControl from './FormControl'
-    import FormInput from './FormInput'
+    import FormInput from './FormField'
     import {mapGetters} from 'vuex';
 
     export default {
@@ -148,30 +156,21 @@
             state: 'getState'
         }),
         components: {
-            FormControl,
             FormInput
+        },
+        mounted: function () {
+
+        },
+        methods: {
+            updateState(exp) {
+                this.$store.commit('updatePersonalInfo', this.state, exp);
+            }
         },
     }
 </script>
 <style>
-    .form-section {
-        margin-top: 10px;
-    }
 
-    .form-section-head {
-        /*border: solid 1px grey;*/
-        border-radius: 4px 4px 0 0;
-        padding: 10px;
-        border-bottom: 1px solid transparent;
-        background-color: #dddddd;
-        margin: 0;
-    }
-
-    .form-section-body {
-        padding: 10px;
-        border: solid 1px #dddddd;
-        border-radius: 0 0 4px 4px;
-        border-top: 1px solid transparent;
-
+    .help-block {
+        margin-top: 5px;
     }
 </style>
