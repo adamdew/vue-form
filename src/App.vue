@@ -43,7 +43,6 @@
 
 <script>
     import PersonalInformation from './components/PersonalInformation'
-    import CompanyInformation from './components/CompanyInformation'
     import PriceSheet from './components/PriceSheet'
     import FormReceipt from './components/FormReceipt'
     import FormControl from './components/FormControl'
@@ -54,7 +53,6 @@
         name: 'App',
         components: {
             PersonalInformation,
-            CompanyInformation,
             PriceSheet,
             FormReceipt,
             UserInfo,
