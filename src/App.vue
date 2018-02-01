@@ -6,7 +6,6 @@
                     Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName
                     }}, {{ state.personalInfo.degree }}</strong>
                 </div>
-
             </div>
         </transition>
         <div v-if="state.items.sessionSelection.PRODUCTID > 0" class="row">
@@ -18,12 +17,11 @@
                 <FormControl/>
             </div>
             <div class="col-md-4">
-                <div class="container review-container" >
+                <div class="container review-container">
                     <FormReceipt></FormReceipt>
-                    <div v-if="nameIsSet">
-                        <hr/>
-                        <UserInfo></UserInfo>
-                    </div>
+                </div>
+                <div v-if="nameIsSet" class="container review-container">
+                    <UserInfo></UserInfo>
                 </div>
             </div>
         </div>
@@ -119,6 +117,6 @@
     }
 
     hr {
-        color:black;
+        color: black;
     }
 </style>

@@ -1,13 +1,10 @@
 <template>
     <div class="form-buttons">
         <transition name="component-fade" mode="out-in">
-        <div v-if="state.errors.length !== 0" id="error-warning" class="row">
+        <div id="warnings" class="row">
             <div class="col-sm-12">
-                <div class="alert alert-danger" role="alert">
-                    <strong>Warning!</strong> There are {{state.errors.length}} errors in your submission, please correct them before finishing.
-                    <ul>
-                        <li v-for="error in state.errors">{{ error.name }}</li>
-                    </ul>
+                <div v-if="state.incomplete.length !== 0" class="alert alert-info" role="alert">
+                    There are {{state.incomplete.length}} incomplete fields in your submission, please fill them out before finishing.
                 </div>
             </div>
         </div>

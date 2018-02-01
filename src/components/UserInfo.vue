@@ -1,12 +1,15 @@
 <template>
     <div>
         <div class="form-section">
-            <h3 class="form-section-head user-info">Info</h3>
+            <h4 class="form-section-head user-info">Info</h4>
             <div class="form-section-body user-info">
                 <p><strong>Personal Info:</strong></p>
-                <p>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName}}, {{state.personalInfo.degree}}<br>
-                 {{ state.personalInfo.email }}<br>
-                   {{ state.personalInfo.phone }} </p>
+                <p>
+                    {{ state.personalInfo.firstName }} {{ state.personalInfo.lastName}},
+                    {{state.personalInfo.degree}}<br>
+                    {{ state.personalInfo.email }}<br>
+                    {{ state.personalInfo.phone }}
+                </p>
 
                 <p><strong>Address:</strong></p>
                 <p>
@@ -37,7 +40,6 @@
 <style>
     .form-section-head.user-info {
         background-color: transparent;
-
     }
     .form-section-body.user-info {
         border-top: solid 1px #dddddd;

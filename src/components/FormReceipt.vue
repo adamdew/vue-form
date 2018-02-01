@@ -1,20 +1,20 @@
 <template>
     <div>
-        <div class="table receipt-table">
-            <h3>Items</h3>
+        <div class="table table-sm" style="margin-top:10px">
+            <h4 style="padding:10px">Items</h4>
             <tr>
                 <th>Product Name</th>
-                <th>Price</th>
+                <th style="text-align: right">Price</th>
             </tr>
             <tr>
                 <td>{{ state.items.sessionSelection.info[0].name}} - {{ state.items.sessionSelection.info[0].factor}} -
                     {{ state.items.sessionSelection.info[0].description}}
                 </td>
-                <td>${{ state.items.sessionSelection.info[0].price}}</td>
+                <td style="text-align: right">${{ state.items.sessionSelection.info[0].price}}</td>
             </tr>
             <tr>
-                <td><strong>Total:</strong></td>
-                <td><strong>${{ state.items.sessionSelection.info[0].price}}</strong></td>
+                <td style="text-align: right"><strong>Total:</strong></td>
+                <td><strong>${{ state.items.sessionSelection.info[0].price}}</u></strong></td>
             </tr>
         </div>
     </div>

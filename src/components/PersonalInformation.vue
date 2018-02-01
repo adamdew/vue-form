@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-section">
-            <h2 class="form-section-head">Personal Information</h2>
+            <h3 class="form-section-head">Personal Information</h3>
             <div class="form-section-body">
                 <div class="row">
                     <div class="col-sm-4">
@@ -20,7 +20,7 @@
                                 label="Middle Name"
                                 stateName="middleName"
                                 type="text"
-                                placeholder="Enter your middle name" required="notrequired">
+                                placeholder="Enter your middle name">
                         </FormInput>
                     </div>
                     <div class="col-sm-4">
@@ -49,14 +49,14 @@
                                 label="Email Address"
                                 stateName="email"
                                 type="email"
-                                placeholder="Enter your primary email" required="required">
+                                placeholder="Enter your primary email" required="required|email">
                         </FormInput>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-section">
-            <h2 class="form-section-head">Contact Information</h2>
+            <h3 class="form-section-head">Contact Information</h3>
             <div class="form-section-body">
                 <div class="row">
                     <div class="col-sm-12">
@@ -65,7 +65,7 @@
                                 label="Organization/Company"
                                 stateName="company"
                                 type="text"
-                                placeholder="Enter your organization's name" required="notrequired">
+                                placeholder="Enter your organization's name" required="">
                         </FormInput>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                                 label="Street Line 2"
                                 stateName="address2"
                                 type="text"
-                                placeholder="" required="not required">
+                                placeholder="" >
                         </FormInput>
                     </div>
                 </div>
@@ -175,6 +175,8 @@
         methods: {
             updateState(exp) {
                 this.$store.commit('updatePersonalInfo', this.state, exp);
+                this.$store.commit('fieldCompleted', exp);
+
             }
         },
     }

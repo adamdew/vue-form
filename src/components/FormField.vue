@@ -15,6 +15,7 @@
                 <small> {{ errors.first(compId) }}</small>
             </div>
         </transition>
+
     </div>
 </template>
 
@@ -34,11 +35,8 @@
         watch: {
             getErrors: function () {
                 if (this.errors.items.length > 0) {
-                    var errorData = {
-                        name: this.stateName,
-                        count: this.errors.items.length
-                    };
-                    this.reportErrors(errorData);
+
+                    this.reportErrors(this.stateName);
                 }
                 else {
                     this.unreportErrors(this.stateName);
@@ -48,12 +46,16 @@
         methods: {
             updateState(exp) {
                 this.$store.commit('updatePersonalInfo', this.state, exp);
+                this.$store.commit('fieldCompleted', this.stateName);
             },
-            reportErrors(error) {
-                this.$store.commit('setErrors', error);
+            reportErrors(name) {
+                this.$store.commit('setErrors', name);
             },
             unreportErrors(name) {
                 this.$store.commit('unSetErrors', name);
+            },
+            setFieldComplete(name) {
+                this.$store.commit('fieldComplete', name);
             }
         },
         props: [

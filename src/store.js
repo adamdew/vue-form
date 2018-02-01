@@ -530,6 +530,22 @@ export const store = new Vuex.Store({
             }
         },
         errors: [],
+        incomplete: [
+            'firstName',
+            'lastName',
+            'degree',
+            'email',
+            'address1',
+            'city',
+            'country',
+            'state',
+            'zip',
+            'phone',
+        ],
+        completion: {
+            fieldRequirement: false,
+            itemRequirement: false
+        },
         items:{
             sessionSelection: {
                 PRODUCTID: '',
@@ -557,7 +573,7 @@ export const store = new Vuex.Store({
         },
         unSetErrors(state, name){
             state.errors = state.errors.filter(function(item){
-                return item.name !== name
+                return item !== name
             });
         },
         updateCompanyInfo(state, newState){
@@ -604,6 +620,12 @@ export const store = new Vuex.Store({
                 alert(error);
             });
         },
+        fieldCompleted(state, name) {
+            state.incomplete = state.incomplete.filter(function(item){
+                return item !== name
+            });
+        }
+
     },
 });
 
