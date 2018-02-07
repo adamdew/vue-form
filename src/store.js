@@ -614,15 +614,15 @@ export const store = new Vuex.Store({
                 }
             );
         },
-        updateSessionSelection(state, PRODUCTID) {
-
+        updateSessionSelection(state, PRODUCTID, itemAry) {
+            console.log(itemAry);
             const params = new URLSearchParams();
             params.append('query', 'get_product');
-            params.append('PRODUCTID', state.items.sessionSelection.PRODUCTID);
+            params.append('PRODUCTID', state.items[itemAry].PRODUCTID);
             const app = this;
             apiConfig.data = params;
             axios(apiConfig).then(function (response) {
-                state.items.sessionSelection.info = response.data;
+                state.items[itemAry].info = response.data;
             }).catch(function (error) {
                 alert(error);
             });

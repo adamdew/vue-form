@@ -171,6 +171,7 @@
         },
         methods: {
             updateState(exp) {
+                //dont think that the below line is needed buttt, ill keep it for now
                 this.$store.commit('updatePersonalInfo', this.state, exp);
                 this.$store.commit('fieldCompleted', exp);
             }

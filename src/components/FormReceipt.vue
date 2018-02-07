@@ -11,11 +11,13 @@
                 <td>{{ state.items.sessionSelection.info[0].name}} - {{ state.items.sessionSelection.info[0].factor}} -
                     {{ state.items.sessionSelection.info[0].description}}
                 </td>
+                <td>{{ state.items.additionalSessions}}
+                </td>
                 <td style="text-align: right">${{ state.items.sessionSelection.info[0].price}}</td>
             </tr>
             <tr>
-                <td style="text-align: right"><strong>Total:</strong></td>
-                <td><strong>${{ state.items.sessionSelection.info[0].price}}</u></strong></td>
+                <td style="text-align: right"><strong>Subtotal:</strong></td>
+                <td><strong>${{ subTotal }}</u></strong></td>
             </tr>
         </div>
     </div>
@@ -30,18 +32,13 @@
             ...mapGetters({
                 state: 'getState',
             }),
-//            idk why this has to be here, it was throwing
-//            warnings about the state not being defined yet when it wasent tho..
-//            To see the errors just take out the v-if in the template above
-            isStateReady: () => {
-
-                if(typeof this.state !== 'undefined'){
-                    return true;
-                }
-                else {
-                    return false;
-                    alert('test');
-                }
+            subTotal: function () {
+                var prices = [
+                    this.state.items.sessionSelection.info[0].price
+                ];
+                return prices.reduce((total, currentValue) => {
+                    return total + currentValue;
+                });
             }
         },
         methods: {}

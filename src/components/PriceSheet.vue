@@ -130,24 +130,40 @@
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="optionsRadios" value="option1">
+                        <input
+                                type="radio"
+                                name="optionsRadios"
+                                :value="pricing.saturdayBreakouts.glaucoma.PRODUCTID"
+                                v-model="state.items.additionalSessions.PRODUCTID"
+                        />
                         {{ pricing.saturdayBreakouts.glaucoma.description }}
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="optionsRadios" value="option1">
-                        Retina-Vitreous
+                        <input
+                                type="radio"
+                                name="optionsRadios"
+                                :value="pricing.saturdayBreakouts.retina.PRODUCTID"
+                                v-model="state.items.additionalSessions.PRODUCTID"
+                        />
+                        {{ pricing.saturdayBreakouts.retina.description }}
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="optionsRadios" value="option1">
-                        Pediatric/Strabismus
+                        <input
+                                type="radio"
+                                name="optionsRadios"
+                                :value="pricing.saturdayBreakouts.pediatric.PRODUCTID"
+                                v-model="state.items.additionalSessions.PRODUCTID"
+                        />
+                        {{ pricing.saturdayBreakouts.pediatric.description }}
                     </label>
                 </div>
             </div>
         </div>
+        {{additionalProductID}}
     </div>
 </template>
 <script>
@@ -218,14 +234,20 @@
             productID: function () {
                 return this.state.items.sessionSelection.PRODUCTID;
             },
+            additionalProductID: function () {
+                return this.state.items.additionalSessions.PRODUCTID;
+            },
         },
         components: {
             FormReceipt
         },
         watch: {
             productID: function () {
-                this.$store.commit('updateSessionSelection', this.state.items.sessionSelection.PRODUCTID);
+                this.$store.commit('updateSessionSelection', this.state.items.sessionSelection.PRODUCTID, 'sessionSelection');
             },
+            additionalProductID: function () {
+                this.$store.commit('updateSessionSelection', this.state.items.additionalSessions.PRODUCTID, 'additionalSessions');
+            }
         },
         mounted() {
             this.fetchPrices();

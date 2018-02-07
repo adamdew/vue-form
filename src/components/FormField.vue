@@ -15,11 +15,10 @@
             <div v-show="errors.has(compId)" class="help-block alert alert-danger">
                 <small> {{ errors.first(compId) }}</small>
             </div>
-
         </transition>
         {{ errors }}
     </div>
-</template>
+</template>996
 
 <script>
 
