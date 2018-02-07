@@ -3,6 +3,7 @@
         <label :for="compId">{{ label }}</label>
         <input :type="type"
                v-model='state.personalInfo[stateName]'
+
                @keyup="updateState(stateName)"
                class="form-control"
                :id="compId"
@@ -14,14 +15,30 @@
             <div v-show="errors.has(compId)" class="help-block alert alert-danger">
                 <small> {{ errors.first(compId) }}</small>
             </div>
-        </transition>
 
+        </transition>
+        {{ errors }}
     </div>
 </template>
 
 <script>
 
-    import {mapGetters} from 'vuex';
+    import { mapGetters } from 'vuex';
+    import { Validator } from 'vee-validate';
+
+    Validator.extend('newRule', {
+        getMessage(field, params, data) {
+            return (data && data.message) || "It's just not me";
+        },
+        validate(value) {
+            if(value == 'Adam'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    });
 
     export default {
         computed: {
@@ -32,10 +49,18 @@
                 return this.errors.items;
             },
         },
+//        mounted: function(){
+//            var searchFor = this.state.errors.filter(function(item){
+//                return item === this.stateName;
+//            });
+//            if (this.state.errors.length > 0) {
+//                this.reportErrors(this.stateName);
+//            }
+//        },
         watch: {
             getErrors: function () {
-                if (this.errors.items.length > 0) {
 
+                if (this.errors.items.length > 0) {
                     this.reportErrors(this.stateName);
                 }
                 else {
@@ -44,9 +69,8 @@
             }
         },
         methods: {
-            updateState(exp) {
-                this.$store.commit('updatePersonalInfo', this.state, exp);
-                this.$store.commit('fieldCompleted', this.stateName);
+            updateState(name) {
+                this.$store.commit('fieldCompleted', name);
             },
             reportErrors(name) {
                 this.$store.commit('setErrors', name);
@@ -54,9 +78,7 @@
             unreportErrors(name) {
                 this.$store.commit('unSetErrors', name);
             },
-            setFieldComplete(name) {
-                this.$store.commit('fieldComplete', name);
-            }
+
         },
         props: [
             'compId',
@@ -72,11 +94,9 @@
     .form-buttons {
         margin-top: 10px;
     }
-
     .component-fade-enter-active, .component-fade-leave-active {
         transition: opacity .3s ease;
     }
-
     .component-fade-enter, .component-fade-leave-to
         /* .component-fade-leave-active below version 2.1.8 */
     {

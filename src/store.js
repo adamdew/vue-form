@@ -530,6 +530,7 @@ export const store = new Vuex.Store({
             }
         },
         errors: [],
+        //Below are the fields we want to be required
         incomplete: [
             'firstName',
             'lastName',
@@ -551,7 +552,10 @@ export const store = new Vuex.Store({
                 PRODUCTID: '',
                 info: {}
             },
-            additionalSesssions: [],
+            additionalSessions: {
+                PRODUCTID: '',
+                info: {}
+            },
             specialEvents: [],
         },
         stateList: usStates,
@@ -597,15 +601,18 @@ export const store = new Vuex.Store({
         fetchPrices(state, query){
             const params = new URLSearchParams();
             params.append('query', query);
-            const app = this;
             apiConfig.data = params;
-            axios(apiConfig).then(function (response) {
-                if(query === 'combined_prices'){
-                    app.state.priceSheet.priceData.combined = response.data;
+            axios(apiConfig).then(
+                 response => {
+                    if(query === 'combined_prices'){
+                        state.priceSheet.priceData.combined = response.data;
+                    }
                 }
-            }).catch(function (error) {
-                alert(error);
-            });
+            ).catch(
+                error => {
+                    alert(error);
+                }
+            );
         },
         updateSessionSelection(state, PRODUCTID) {
 

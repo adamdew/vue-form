@@ -104,9 +104,48 @@
                         <td><input class="form-check-input" type="radio" name="registration"
                                    :value="currentPricing.coding.ophthalmicNurse.PRODUCTID"
                                    v-model="state.items.sessionSelection.PRODUCTID"></td>
-
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-head">
+                <h4>Additional Sessions</h4>
+            </div>
+            <div class="form-section-body">
+                <h5>Scientific Sessions Breakout Sessions (Saturday, June 9)</h5>
+                <p>Please select the breakout session below that you would like to attend. There is no additional fee
+                    for the breakout sessions.</p>
+                <div class="radio">
+                    <label>
+                        <input
+                                type="radio"
+                                name="optionsRadios"
+                                :value="pricing.saturdayBreakouts.cornea.PRODUCTID"
+                                v-model="state.items.additionalSessions.PRODUCTID"
+                        />
+                        {{ pricing.saturdayBreakouts.cornea.description }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" value="option1">
+                        {{ pricing.saturdayBreakouts.glaucoma.description }}
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" value="option1">
+                        Retina-Vitreous
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" value="option1">
+                        Pediatric/Strabismus
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -159,11 +198,17 @@
                             ophthalmicNurse: this.getPriceData('Coding and Reimbursement', 'Ophthalmic Nurse', 'regular'),
                         }
                     },
+                    saturdayBreakouts: {
+                        cornea: this.getPriceData('Saturday Breakout Session', null, 'Cornea/Refractive Surgery/External Disease'),
+                        glaucoma: this.getPriceData('Saturday Breakout Session', null, 'Glaucoma'),
+                        retina: this.getPriceData('Saturday Breakout Session', null, 'Retina-Vitreous'),
+                        pediatric: this.getPriceData('Saturday Breakout Session', null, 'Pediatric/Strabismus')
+                    },
+                    yoSeminar: this.getPriceData('YO Seminar', null, 'Young Ophthalmologist Seminar'),
                 }
             },
             currentPricing: function () {
                 if (this.state.priceSheet.priceData.earlybird) {
-                    //console.log('yes');
                     return this.pricing.earlybirdPricing;
                 }
                 else {

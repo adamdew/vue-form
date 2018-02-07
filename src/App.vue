@@ -8,7 +8,7 @@
                 </div>
             </div>
         </transition>
-        <div v-if="state.items.sessionSelection.PRODUCTID > 0" class="row">
+        <div v-if="sessionIsSet" class="row">
             <div class="col-md-8">
                 <transition name="component-fade" mode="out-in">
                     <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
@@ -18,6 +18,7 @@
             </div>
             <div class="col-md-4">
                 <div class="container review-container">
+
                     <FormReceipt></FormReceipt>
                 </div>
                 <div v-if="nameIsSet" class="container review-container">
@@ -45,6 +46,7 @@
     import FormReceipt from './components/FormReceipt'
     import FormControl from './components/FormControl'
     import UserInfo from './components/UserInfo'
+
     import {mapGetters} from 'vuex';
 
     export default {
@@ -68,6 +70,14 @@
                 } else if (this.state.personalInfo.lastName == '') {
                     return false;
                 } else {
+                    return true;
+                }
+            },
+            sessionIsSet: function(){
+                if(Object.keys(this.state.items.sessionSelection.info).length === 0){
+                    return false;
+                }
+                else {
                     return true;
                 }
             }
