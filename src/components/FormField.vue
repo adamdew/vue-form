@@ -3,7 +3,6 @@
         <label :for="compId">{{ label }}</label>
         <input :type="type"
                v-model='state.personalInfo[stateName]'
-
                @keyup="updateState(stateName)"
                class="form-control"
                :id="compId"
@@ -16,7 +15,6 @@
                 <small> {{ errors.first(compId) }}</small>
             </div>
         </transition>
-        {{ errors }}
     </div>
 </template>996
 
@@ -48,14 +46,6 @@
                 return this.errors.items;
             },
         },
-//        mounted: function(){
-//            var searchFor = this.state.errors.filter(function(item){
-//                return item === this.stateName;
-//            });
-//            if (this.state.errors.length > 0) {
-//                this.reportErrors(this.stateName);
-//            }
-//        },
         watch: {
             getErrors: function () {
 

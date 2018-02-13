@@ -74,7 +74,7 @@
                 }
             },
             sessionIsSet: function(){
-                if(Object.keys(this.state.items.sessionSelection.info).length === 0){
+                if(!this.state.session){
                     return false;
                 }
                 else {
@@ -93,7 +93,7 @@
     }
 
     .component-fade-enter-active, .component-fade-leave-active {
-        transition: opacity .2s ease;
+        transition: opacity .1s ease;
     }
 
     .component-fade-enter, .component-fade-leave-to

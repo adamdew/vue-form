@@ -8,16 +8,20 @@
                 <th style="text-align: right">Price</th>
             </tr>
             <tr >
-                <td>{{ state.items.sessionSelection.info[0].name}} - {{ state.items.sessionSelection.info[0].factor}} -
-                    {{ state.items.sessionSelection.info[0].description}}
+                <td>{{ selectedSession.name }} - {{selectedSession.factor}}
                 </td>
-                <td>{{ state.items.additionalSessions}}
+
+                <td style="text-align: right">${{ selectedSession.price }}</td>
+            </tr>
+            <tr >
+                <td>{{ breakoutSession.name+" - "+breakoutSession.description}}
                 </td>
-                <td style="text-align: right">${{ state.items.sessionSelection.info[0].price}}</td>
+
+                <td style="text-align: right">${{ breakoutSession.price }}</td>
             </tr>
             <tr>
                 <td style="text-align: right"><strong>Subtotal:</strong></td>
-                <td><strong>${{ subTotal }}</u></strong></td>
+                <td><strong>$<u>{{ selectedSession.price }}</u></strong></td>
             </tr>
         </div>
     </div>
@@ -32,16 +36,32 @@
             ...mapGetters({
                 state: 'getState',
             }),
+            selectedSession: function(){
+                return this.getProduct(this.state.session);
+            },
+            breakoutSession: function(){
+                return this.getProduct(this.state.breakoutSession);
+            },
             subTotal: function () {
-                var prices = [
-                    this.state.items.sessionSelection.info[0].price
-                ];
-                return prices.reduce((total, currentValue) => {
-                    return total + currentValue;
-                });
+                // var prices = [
+                //     this.state.items.sessionSelection.info[0].price
+                // ];
+                // return prices.reduce((total, currentValue) => {
+                //     return total + currentValue;
+                // });
             }
         },
-        methods: {}
+        methods: {
+            getProduct: function(PRODUCTID){
+                let needle = '';
+                this.state.priceSheet.priceData.combined.filter((product) => {
+                    if(product.PRODUCTID === PRODUCTID){
+                        needle = product;
+                    }
+                });
+                return needle;
+            }
+        }
     }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-section">
-            <h2 class="form-section-head">2018 Registration</h2>
+            <h4 class="form-section-head">Session Pricing</h4>
             <div class="form-section-body">
                 <table class="table table-sm">
                     <thead class="thead-default">
@@ -11,100 +11,56 @@
                         <th style="border:none"><em>Regular</em><br/>(After April 27)</th>
                     </tr>
                     </thead>
-                    <tr>
-                        <td>FSO Member</td>
-                        <td>${{ pricing.earlybirdPricing.sessions.member.price }}</td>
-                        <td>${{ pricing.regularPricing.sessions.member.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.sessions.member.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
-                    <tr>
-                        <td>Non-Member</td>
-                        <td>${{ pricing.earlybirdPricing.sessions.nonMember.price }}</td>
-                        <td>${{ pricing.regularPricing.sessions.nonMember.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.sessions.nonMember.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
-                    <tr>
-                        <td>Ophthalmic Nurse</td>
-                        <td>${{ pricing.earlybirdPricing.sessions.ophthalmicNurse.price }}</td>
-                        <td>${{ pricing.regularPricing.sessions.ophthalmicNurse.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.sessions.ophthalmicNurse.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
-                    <tr>
-                        <td>In-Training</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.sessions.inTraining.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
+                    <PricingRow
+                        name="Scientific Sessions"
+                        factor="FSO Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Scientific Sessions"
+                            factor="Non-Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Scientific Sessions"
+                            factor="Ophthalmic Nurse"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Scientific Sessions"
+                            factor="In-Training"
+                    ></PricingRow>
                     <tr>
                         <th>Office Administrator Program<br/>(Saturday, June 9)</th>
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>FSO Member</td>
-                        <td>${{ pricing.earlybirdPricing.oa.member.price }}</td>
-                        <td>${{ pricing.regularPricing.oa.member.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.oa.member.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
-                    <tr>
-                        <td>Non-Member</td>
-                        <td>${{ pricing.earlybirdPricing.oa.nonMember.price }}</td>
-                        <td>${{ pricing.regularPricing.oa.nonMember.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.oa.nonMember.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-
-                    </tr>
-                    <tr>
-                        <td>Ophthalmic Nurse</td>
-                        <td>${{ pricing.earlybirdPricing.oa.ophthalmicNurse.price }}</td>
-                        <td>${{ pricing.regularPricing.oa.ophthalmicNurse.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.oa.ophthalmicNurse.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-
-                    </tr>
+                    <PricingRow
+                            name="Office Administrator"
+                            factor="FSO Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Office Administrator"
+                            factor="Non-Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Office Administrator"
+                            factor="Ophthalmic Nurse"
+                    ></PricingRow>
                     <tr>
                         <th>Coding and Reimbursement Program<br/>(Friday, June 8)</th>
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>FSO Member</td>
-                        <td>${{ pricing.earlybirdPricing.coding.member.price }}</td>
-                        <td>${{ pricing.regularPricing.coding.member.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.coding.member.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-
-                    </tr>
-                    <tr>
-                        <td>Non-Member</td>
-                        <td>${{ pricing.earlybirdPricing.coding.nonMember.price }}</td>
-                        <td>${{ pricing.regularPricing.coding.nonMember.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.coding.nonMember.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-
-                    </tr>
-                    <tr>
-                        <td>Ophthalmic Nurse</td>
-                        <td>${{ pricing.earlybirdPricing.coding.ophthalmicNurse.price }}</td>
-                        <td>${{ pricing.regularPricing.coding.ophthalmicNurse.price }}</td>
-                        <td><input class="form-check-input" type="radio" name="registration"
-                                   :value="currentPricing.coding.ophthalmicNurse.PRODUCTID"
-                                   v-model="state.items.sessionSelection.PRODUCTID"></td>
-                    </tr>
+                    <PricingRow
+                            name="Coding and Reimbursement"
+                            factor="FSO Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Coding and Reimbursement"
+                            factor="Non-Member"
+                    ></PricingRow>
+                    <PricingRow
+                            name="Coding and Reimbursement"
+                            factor="Ophthalmic Nurse"
+                    ></PricingRow>
                 </table>
             </div>
         </div>
@@ -123,7 +79,7 @@
                                 type="radio"
                                 name="optionsRadios"
                                 :value="pricing.saturdayBreakouts.cornea.PRODUCTID"
-                                v-model="state.items.additionalSessions.PRODUCTID"
+                                v-model="state.breakoutSession"
                         />
                         {{ pricing.saturdayBreakouts.cornea.description }}
                     </label>
@@ -134,7 +90,7 @@
                                 type="radio"
                                 name="optionsRadios"
                                 :value="pricing.saturdayBreakouts.glaucoma.PRODUCTID"
-                                v-model="state.items.additionalSessions.PRODUCTID"
+                                v-model="state.breakoutSession"
                         />
                         {{ pricing.saturdayBreakouts.glaucoma.description }}
                     </label>
@@ -145,7 +101,7 @@
                                 type="radio"
                                 name="optionsRadios"
                                 :value="pricing.saturdayBreakouts.retina.PRODUCTID"
-                                v-model="state.items.additionalSessions.PRODUCTID"
+                                v-model="state.breakoutSession"
                         />
                         {{ pricing.saturdayBreakouts.retina.description }}
                     </label>
@@ -156,20 +112,24 @@
                                 type="radio"
                                 name="optionsRadios"
                                 :value="pricing.saturdayBreakouts.pediatric.PRODUCTID"
-                                v-model="state.items.additionalSessions.PRODUCTID"
+                                v-model="state.breakoutSession"
                         />
                         {{ pricing.saturdayBreakouts.pediatric.description }}
                     </label>
                 </div>
+                <br/>
+                <h5>Young Ophthalmologist (YO) Seminar (Saturday, June 9 | 4:00-6:00 PM)</h5>
+                <p>This program is for YOs and will cover important topics such as practice building, work-life balance, management of medical-legal issues and personal finance.
+                </p>
             </div>
         </div>
-        {{additionalProductID}}
     </div>
 </template>
 <script>
 
     import {mapGetters} from 'vuex';
     import FormReceipt from './FormReceipt'
+    import PricingRow from './PricingRow'
 
     export default {
         computed: {
@@ -178,42 +138,6 @@
             }),
             pricing: function () {
                 return {
-                    earlybirdPricing: {
-                        sessions: {
-                            member: this.getPriceData('Scientific Sessions', 'FSO Member', 'earlybird'),
-                            nonMember: this.getPriceData('Scientific Sessions', 'Non-Member', 'earlybird'),
-                            ophthalmicNurse: this.getPriceData('Scientific Sessions', 'Ophthalmic Nurse', 'earlybird'),
-                            inTraining: this.getPriceData('Scientific Sessions', 'In-Training', null)
-                        },
-                        oa: {
-                            member: this.getPriceData('Office Administrator', 'FSO Member', 'earlybird'),
-                            nonMember: this.getPriceData('Office Administrator', 'Non-Member', 'earlybird'),
-                            ophthalmicNurse: this.getPriceData('Office Administrator', 'Ophthalmic Nurse', 'earlybird'),
-                        },
-                        coding: {
-                            member: this.getPriceData('Coding and Reimbursement', 'FSO Member', 'earlybird'),
-                            nonMember: this.getPriceData('Coding and Reimbursement', 'Non-Member', 'earlybird'),
-                            ophthalmicNurse: this.getPriceData('Coding and Reimbursement', 'Ophthalmic Nurse', 'earlybird'),
-                        }
-                    },
-                    regularPricing: {
-                        sessions: {
-                            member: this.getPriceData('Scientific Sessions', 'FSO Member', 'regular'),
-                            nonMember: this.getPriceData('Scientific Sessions', 'Non-Member', 'regular'),
-                            ophthalmicNurse: this.getPriceData('Scientific Sessions', 'Ophthalmic Nurse', 'regular'),
-                            inTraining: this.getPriceData('Scientific Sessions', 'Ophthalmic Nurse', 'regular')
-                        },
-                        oa: {
-                            member: this.getPriceData('Office Administrator', 'FSO Member', 'regular'),
-                            nonMember: this.getPriceData('Office Administrator', 'Non-Member', 'regular'),
-                            ophthalmicNurse: this.getPriceData('Office Administrator', 'Ophthalmic Nurse', 'regular'),
-                        },
-                        coding: {
-                            member: this.getPriceData('Coding and Reimbursement', 'FSO Member', 'regular'),
-                            nonMember: this.getPriceData('Coding and Reimbursement', 'Non-Member', 'regular'),
-                            ophthalmicNurse: this.getPriceData('Coding and Reimbursement', 'Ophthalmic Nurse', 'regular'),
-                        }
-                    },
                     saturdayBreakouts: {
                         cornea: this.getPriceData('Saturday Breakout Session', null, 'Cornea/Refractive Surgery/External Disease'),
                         glaucoma: this.getPriceData('Saturday Breakout Session', null, 'Glaucoma'),
@@ -223,23 +147,10 @@
                     yoSeminar: this.getPriceData('YO Seminar', null, 'Young Ophthalmologist Seminar'),
                 }
             },
-            currentPricing: function () {
-                if (this.state.priceSheet.priceData.earlybird) {
-                    return this.pricing.earlybirdPricing;
-                }
-                else {
-                    return this.pricing.regularPricing;
-                }
-            },
-            productID: function () {
-                return this.state.items.sessionSelection.PRODUCTID;
-            },
-            additionalProductID: function () {
-                return this.state.items.additionalSessions.PRODUCTID;
-            },
         },
         components: {
-            FormReceipt
+            FormReceipt,
+            PricingRow
         },
         watch: {
             productID: function () {
@@ -271,9 +182,8 @@
                     return 0;
                 }
             },
-            updateSession() {
-                console.log(this.state.items.sessionSelection);
-                //this.$store.commit('updateSessionSelection', this.state.items.sessionSelection);
+            addItem(PRODUCTID) {
+                this.$store.commit('addItem', PRODUCTID);
             },
 
 

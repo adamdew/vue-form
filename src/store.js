@@ -5,12 +5,12 @@ import axios from 'axios';
 Vue.use(Vuex);
 
 var apiConfig = {
-    data   : {},
+    data: {},
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
     },
-    method : 'post',
-    url    : 'https://www.ophmasters.com/registration/reg_api.php',
+    method: 'post',
+    url: 'https://www.ophmasters.com/registration/reg_api.php',
 };
 
 var usStates = [
@@ -500,7 +500,7 @@ var countries = [
 export const store = new Vuex.Store({
     state: {
         panelRouting: {
-          active: 1,
+            active: 1,
         },
         personalInfo: {
             panelId: 2,
@@ -525,7 +525,7 @@ export const store = new Vuex.Store({
         priceSheet: {
             panelId: 1,
             priceData: {
-                combined:[],
+                combined: [],
                 earlybird: true
             }
         },
@@ -547,64 +547,56 @@ export const store = new Vuex.Store({
             fieldRequirement: false,
             itemRequirement: false
         },
-        items:{
-            sessionSelection: {
-                PRODUCTID: '',
-                info: {}
-            },
-            additionalSessions: {
-                PRODUCTID: '',
-                info: {}
-            },
-            specialEvents: [],
-        },
+        session: '',
+        breakoutSession: '',
+        items: [],
         stateList: usStates,
         countryList: countries
     },
     getters: {
-        getState(state){
+        getState(state) {
             return state;
         }
     },
     mutations: {
-        updatePersonalInfo(state, newState, element){
+        updatePersonalInfo(state, newState, element) {
             state.personalInfo[element] = newState.personalInfo[element];
         },
-        setErrors(state, error){
-            if(!search(error.name, state.errors)){
+        setErrors(state, error) {
+            if (!search(error.name, state.errors)) {
                 state.errors.push(error);
             }
         },
-        unSetErrors(state, name){
-            state.errors = state.errors.filter(function(item){
+        unSetErrors(state, name) {
+            state.errors = state.errors.filter(function (item) {
                 return item !== name
             });
         },
-        updateCompanyInfo(state, newState){
+        updateCompanyInfo(state, newState) {
             state.companyInfo = {
                 companyName: newState.companyInfo.companyName,
                 panelId: newState.companyInfo.panelId,
             }
         },
-        updatePriceSheetInfo(state, newState){
+        updatePriceSheetInfo(state, newState) {
             state.priceSheet = {
                 panelId: newState,
                 fetchedData: newState.fetchedData,
             }
         },
-        nextPage(state){
+        nextPage(state) {
             state.panelRouting.active++;
         },
-        previousPage(state){
+        previousPage(state) {
             state.panelRouting.active--;
         },
-        fetchPrices(state, query){
+        fetchPrices(state, query) {
             const params = new URLSearchParams();
             params.append('query', query);
             apiConfig.data = params;
             axios(apiConfig).then(
-                 response => {
-                    if(query === 'combined_prices'){
+                response => {
+                    if (query === 'combined_prices') {
                         state.priceSheet.priceData.combined = response.data;
                     }
                 }
@@ -614,30 +606,20 @@ export const store = new Vuex.Store({
                 }
             );
         },
-        updateSessionSelection(state, PRODUCTID, itemAry) {
-            console.log(itemAry);
-            const params = new URLSearchParams();
-            params.append('query', 'get_product');
-            params.append('PRODUCTID', state.items[itemAry].PRODUCTID);
-            const app = this;
-            apiConfig.data = params;
-            axios(apiConfig).then(function (response) {
-                state.items[itemAry].info = response.data;
-            }).catch(function (error) {
-                alert(error);
-            });
-        },
         fieldCompleted(state, name) {
-            state.incomplete = state.incomplete.filter(function(item){
+            state.incomplete = state.incomplete.filter(function (item) {
                 return item !== name
             });
-        }
+        },
+        addItem(state, PRODUCTID) {
 
+
+        }
     },
 });
 
-function search(nameKey, myArray){
-    for (var i=0; i < myArray.length; i++) {
+function search(nameKey, myArray) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].name === nameKey) {
             return myArray[i];
         }
