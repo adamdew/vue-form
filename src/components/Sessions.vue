@@ -77,7 +77,7 @@
                     <label>
                         <input
                                 type="radio"
-                                name="optionsRadios"
+                                name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.cornea.PRODUCTID"
                                 v-model="state.breakoutSession"
                         />
@@ -88,7 +88,7 @@
                     <label>
                         <input
                                 type="radio"
-                                name="optionsRadios"
+                                name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.glaucoma.PRODUCTID"
                                 v-model="state.breakoutSession"
                         />
@@ -99,7 +99,7 @@
                     <label>
                         <input
                                 type="radio"
-                                name="optionsRadios"
+                                name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.retina.PRODUCTID"
                                 v-model="state.breakoutSession"
                         />
@@ -110,7 +110,7 @@
                     <label>
                         <input
                                 type="radio"
-                                name="optionsRadios"
+                                name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.pediatric.PRODUCTID"
                                 v-model="state.breakoutSession"
                         />
@@ -121,6 +121,28 @@
                 <h5>Young Ophthalmologist (YO) Seminar (Saturday, June 9 | 4:00-6:00 PM)</h5>
                 <p>This program is for YOs and will cover important topics such as practice building, work-life balance, management of medical-legal issues and personal finance.
                 </p>
+                <div class="checkbox">
+                    <label>
+                        <input
+                                type="radio"
+                                name="yoSeminar"
+                                :value="pricing.yoSeminar.PRODUCTID"
+                                v-model="state.yoSeminar"
+                        />
+                        Yes, I will attend
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input
+                                type="radio"
+                                name="yoSeminar"
+                                :value="0"
+                                v-model="state.yoSeminar"
+                        />
+                        No, I will not attend
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -152,14 +174,6 @@
             FormReceipt,
             PricingRow
         },
-        watch: {
-            productID: function () {
-                this.$store.commit('updateSessionSelection', this.state.items.sessionSelection.PRODUCTID, 'sessionSelection');
-            },
-            additionalProductID: function () {
-                this.$store.commit('updateSessionSelection', this.state.items.additionalSessions.PRODUCTID, 'additionalSessions');
-            }
-        },
         mounted() {
             this.fetchPrices();
         },
@@ -182,11 +196,6 @@
                     return 0;
                 }
             },
-            addItem(PRODUCTID) {
-                this.$store.commit('addItem', PRODUCTID);
-            },
-
-
         }
     }
 </script>

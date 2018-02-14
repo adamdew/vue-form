@@ -518,7 +518,7 @@ export const store = new Vuex.Store({
             zip: '',
             phone: '',
         },
-        companyInfo: {
+        specialEvents: {
             panelId: 3,
             companyName: ''
         },
@@ -549,7 +549,7 @@ export const store = new Vuex.Store({
         },
         session: '',
         breakoutSession: '',
-        items: [],
+        yoSeminar: '',
         stateList: usStates,
         countryList: countries
     },

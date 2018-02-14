@@ -11,14 +11,14 @@
         <div v-if="sessionIsSet" class="row">
             <div class="col-md-8">
                 <transition name="component-fade" mode="out-in">
-                    <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
+                    <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
                     <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
+                    <SpecialEvents v-if="state.panelRouting.active === state.specialEvents.panelId"/>
                 </transition>
                 <FormControl/>
             </div>
             <div class="col-md-4">
                 <div class="container review-container">
-
                     <FormReceipt></FormReceipt>
                 </div>
                 <div v-if="nameIsSet" class="container review-container">
@@ -29,9 +29,9 @@
         <div v-else class="row">
             <div class="col-md-12">
                 <transition name="component-fade" mode="out-in">
-                    <PriceSheet v-if="state.panelRouting.active === state.priceSheet.panelId"/>
+                    <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
                     <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
-                    <CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId"/>
+                    <SpecialEvents v-if="state.panelRouting.active === state.specialEvents.panelId"/>
                 </transition>
                 <FormControl/>
             </div>
@@ -42,10 +42,11 @@
 
 <script>
     import PersonalInformation from './components/PersonalInformation'
-    import PriceSheet from './components/PriceSheet'
+    import Sessions from './components/Sessions'
     import FormReceipt from './components/FormReceipt'
     import FormControl from './components/FormControl'
     import UserInfo from './components/UserInfo'
+    import SpecialEvents from './components/SpecialEvents'
 
     import {mapGetters} from 'vuex';
 
@@ -53,10 +54,11 @@
         name: 'App',
         components: {
             PersonalInformation,
-            PriceSheet,
+            Sessions,
             FormReceipt,
             UserInfo,
-            FormControl
+            FormControl,
+            SpecialEvents
         },
         computed: {
             ...mapGetters({

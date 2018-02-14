@@ -7,23 +7,30 @@
                 <th>Product Name</th>
                 <th style="text-align: right">Price</th>
             </tr>
-            <tr >
+            <tr v-if="state.session">
                 <td>{{ selectedSession.name }} - {{selectedSession.factor}}
                 </td>
 
                 <td style="text-align: right">${{ selectedSession.price }}</td>
             </tr>
-            <tr >
+            <tr v-if="state.breakoutSession">
                 <td>{{ breakoutSession.name+" - "+breakoutSession.description}}
                 </td>
 
                 <td style="text-align: right">${{ breakoutSession.price }}</td>
+            </tr>
+            <tr v-if="state.yoSeminar">
+                <td>{{ yoSeminar.name+" - "+yoSeminar.description}}
+                </td>
+
+                <td style="text-align: right">${{ yoSeminar.price }}</td>
             </tr>
             <tr>
                 <td style="text-align: right"><strong>Subtotal:</strong></td>
                 <td><strong>$<u>{{ selectedSession.price }}</u></strong></td>
             </tr>
         </div>
+
     </div>
 </template>
 
@@ -42,13 +49,11 @@
             breakoutSession: function(){
                 return this.getProduct(this.state.breakoutSession);
             },
+            yoSeminar: function() {
+                return this.getProduct(this.state.yoSeminar);
+            },
             subTotal: function () {
-                // var prices = [
-                //     this.state.items.sessionSelection.info[0].price
-                // ];
-                // return prices.reduce((total, currentValue) => {
-                //     return total + currentValue;
-                // });
+                return this.selectedSession.price;
             }
         },
         methods: {
