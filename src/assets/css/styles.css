@@ -1,0 +1,100 @@
+.table__ticket {
+    margin-bottom: 0px;
+}
+.ticket_table_head {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 1px;
+}
+
+.ticket_table_head td {
+    border-top: 0px!important;
+}
+.ticket_row td {
+    vertical-align: top;
+    padding: 12px 5px!important;
+}
+
+.ticket_row .ticket_type_name {
+    font-weight:700
+}
+.ticket_row .ticket_type_name .description {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 5px 0 0 0;
+    font-weight: normal;
+}
+.ticket_row .ticket_type_name .description ul {
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+}
+
+.event_header {
+    margin-top: 30px;
+    border-bottom: 1px dotted #D5D5D3;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+}
+.event_header h1 {
+    font-size: 26px;
+    line-height: 28px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.event_header h2 {
+    font-size: 17px;
+    text-align: left;
+    line-height: 21px;
+    color: #4d051a;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}
+
+
+.upsell-description {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 5px 0 0 0;
+    font-weight: normal;
+}
+
+.arrow-down {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAJCAYAAAAGuM1UAAAARElEQVR4AZXLoQ3AMBAEwXFP7ielpcvHIQdPLwUs24HzMw8Gd5kuJq8Xs6DMJq9TUZ9PQEF1DmiozwELyryBoDp3sPcBE+gdTR3BcJAAAAAASUVORK5CYII=);
+    background-size: 100% 100%;
+    float: right;
+    height: 9px;
+    margin: 5px;
+    width: 12px;
+    opacity: 0.38;
+    transform: translateZ(0);
+    -webkit-transition: opacity 300ms ease-out;
+}
+
+.arrow-down.opened {
+    opacity: 0.54;
+    transform: rotateX(180deg);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+    /* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.table_row__expired {
+}

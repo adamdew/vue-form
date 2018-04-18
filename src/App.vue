@@ -8,18 +8,17 @@
                 </div>
             </div>
         </transition>
-        <div v-if="sessionIsSet" class="row">
+        <div v-if="cartIsNotEmpty" class="row">
             <div class="col-md-8">
-                <transition name="component-fade" mode="out-in">
-                    <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
-                    <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
-                    <GuestTickets v-if="state.panelRouting.active === state.guestTickets.panelId"/>
-                </transition>
-                <FormControl/>
+
+                    <Session />
+                    <!--<PersonalInformation />-->
+                    <!--<FormControl/>-->
             </div>
             <div class="col-md-4">
-                <div class="container review-container">
-                    <FormReceipt></FormReceipt>
+                <div class="review-container">
+
+                    <Cart></Cart>
                 </div>
                 <div v-if="nameIsSet" class="container review-container">
                     <UserInfo></UserInfo>
@@ -29,9 +28,9 @@
         <div v-else class="row">
             <div class="col-md-12">
                 <transition name="component-fade" mode="out-in">
-                    <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
-                    <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
-                    <GuestTickets v-if="state.panelRouting.active === state.guestTickets.panelId"/>
+                    <Session v-if="state.panelRouting.active === state.priceSheet.panelId"/>
+                    <!--<PersonalInformation />-->
+                    <!--<CompanyInformation v-if="state.panelRouting.active === state.companyInfo.panelId"/>-->
                 </transition>
                 <FormControl/>
             </div>
@@ -41,24 +40,22 @@
 </template>
 
 <script>
-
     import PersonalInformation from './components/PersonalInformation'
-    import Sessions from './components/Sessions'
-    import FormReceipt from './components/FormReceipt'
+    import Session from './components/Session/Session'
+    import Cart from './components/Cart/Cart'
     import FormControl from './components/FormControl'
     import UserInfo from './components/UserInfo'
-    import GuestTickets from './components/GuestTickets'
+
     import {mapGetters} from 'vuex';
 
     export default {
         name: 'App',
         components: {
             PersonalInformation,
-            Sessions,
-            FormReceipt,
+            Session,
+            Cart,
             UserInfo,
-            FormControl,
-            GuestTickets
+            FormControl
         },
         computed: {
             ...mapGetters({
@@ -75,8 +72,8 @@
                     return true;
                 }
             },
-            sessionIsSet: function(){
-                if(!this.state.session){
+            cartIsNotEmpty: function(){
+                if(!this.state.cart){
                     return false;
                 }
                 else {
@@ -84,21 +81,12 @@
                 }
             }
         },
-        mounted: function(){
-            var pathToModule = require.resolve('strip-ansi');
-            console.log(pathToModule);
-        },
         methods: {}
     }
 </script>
 
 <style>
-    #app {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .component-fade-enter-active, .component-fade-leave-active {
+     .component-fade-enter-active, .component-fade-leave-active {
         transition: opacity .1s ease;
     }
 

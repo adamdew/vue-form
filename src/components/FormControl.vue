@@ -33,7 +33,6 @@
         methods: {
             nextPage() {
                 this.$store.commit('nextPage');
-                
             },
             previousPage(){
                 this.$store.commit('previousPage');

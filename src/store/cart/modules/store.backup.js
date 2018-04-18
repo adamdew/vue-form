@@ -4,7 +4,7 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const apiConfig = {
+var apiConfig = {
     data: {},
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -13,7 +13,7 @@ const apiConfig = {
     url: 'https://www.ophmasters.com/registration/reg_api.php',
 };
 
-const usStates = [
+var usStates = [
     {
         "name": "Alabama",
         "abbreviation": "AL"
@@ -251,7 +251,7 @@ const usStates = [
         "abbreviation": "WY"
     }
 ];
-const countries = [
+var countries = [
     {name: 'Afghanistan', abbreviation: 'AF'},
     {name: 'Åland Islands', abbreviation: 'AX'},
     {name: 'Albania', abbreviation: 'AL'},
@@ -499,6 +499,7 @@ const countries = [
 
 export const store = new Vuex.Store({
     state: {
+        cart: [],
         panelRouting: {
             active: 1,
         },
@@ -518,7 +519,7 @@ export const store = new Vuex.Store({
             zip: '',
             phone: '',
         },
-        guestTickets: {
+        companyInfo: {
             panelId: 3,
             companyName: ''
         },
@@ -549,8 +550,7 @@ export const store = new Vuex.Store({
         },
         session: '',
         breakoutSession: '',
-        yoSeminar: '',
-        guests: [],
+        items: [],
         stateList: usStates,
         countryList: countries
     },
@@ -612,14 +612,15 @@ export const store = new Vuex.Store({
                 return item !== name
             });
         },
-        addGuestTicket(state, guest) {
-            state.guests.push(guest);
+        addItem(state, PRODUCTID) {
+
+
         }
     },
 });
 
 function search(nameKey, myArray) {
-    for (let i = 0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].name === nameKey) {
             return myArray[i];
         }
