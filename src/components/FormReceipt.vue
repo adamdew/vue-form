@@ -25,9 +25,15 @@
 
                 <td style="text-align: right">${{ yoSeminar.price }}</td>
             </tr>
+            <tr v-for="guestTicket in state.guests">
+                <td>
+                    {{ guestTicket.guestTicketType+" - "+guestTicket.guestName}}
+                </td>
+                <td style="text-align: right">${{ guestTicket.price }}</td>
+            </tr>
             <tr>
                 <td style="text-align: right"><strong>Subtotal:</strong></td>
-                <td><strong>$<u>{{ selectedSession.price }}</u></strong></td>
+                <td style="text-align: right"><strong>$<u>{{ this.subTotal }}</u></strong></td>
             </tr>
         </div>
 
@@ -52,8 +58,16 @@
             yoSeminar: function() {
                 return this.getProduct(this.state.yoSeminar);
             },
-            subTotal: function () {
-                return this.selectedSession.price;
+            guestTotal: function(){
+                let guestTotal = 0;
+                for(let i = 0; i < this.state.guests.length; i++){
+                    guestTotal += this.state.guests[i].price;
+                }
+                return guestTotal;
+            },
+            subTotal: function (){
+                let subTotal = parseInt(this.selectedSession.price) + parseInt(this.guestTotal);
+                return subTotal;
             }
         },
         methods: {

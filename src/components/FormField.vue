@@ -16,7 +16,7 @@
             </div>
         </transition>
     </div>
-</template>996
+</template>
 
 <script>
 

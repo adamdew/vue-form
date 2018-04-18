@@ -13,7 +13,7 @@
                 <transition name="component-fade" mode="out-in">
                     <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
                     <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
-                    <SpecialEvents v-if="state.panelRouting.active === state.specialEvents.panelId"/>
+                    <GuestTickets v-if="state.panelRouting.active === state.guestTickets.panelId"/>
                 </transition>
                 <FormControl/>
             </div>
@@ -31,7 +31,7 @@
                 <transition name="component-fade" mode="out-in">
                     <Sessions v-if="state.panelRouting.active === state.priceSheet.panelId"/>
                     <PersonalInformation v-if="state.panelRouting.active === state.personalInfo.panelId"/>
-                    <SpecialEvents v-if="state.panelRouting.active === state.specialEvents.panelId"/>
+                    <GuestTickets v-if="state.panelRouting.active === state.guestTickets.panelId"/>
                 </transition>
                 <FormControl/>
             </div>
@@ -41,13 +41,13 @@
 </template>
 
 <script>
+
     import PersonalInformation from './components/PersonalInformation'
     import Sessions from './components/Sessions'
     import FormReceipt from './components/FormReceipt'
     import FormControl from './components/FormControl'
     import UserInfo from './components/UserInfo'
-    import SpecialEvents from './components/SpecialEvents'
-
+    import GuestTickets from './components/GuestTickets'
     import {mapGetters} from 'vuex';
 
     export default {
@@ -58,7 +58,7 @@
             FormReceipt,
             UserInfo,
             FormControl,
-            SpecialEvents
+            GuestTickets
         },
         computed: {
             ...mapGetters({
@@ -83,6 +83,10 @@
                     return true;
                 }
             }
+        },
+        mounted: function(){
+            var pathToModule = require.resolve('strip-ansi');
+            console.log(pathToModule);
         },
         methods: {}
     }

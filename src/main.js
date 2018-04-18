@@ -11,11 +11,12 @@ Vue.use(VeeValidate);
 Vue.config.productionTip = false
 
 require('../node_modules/bootstrap/dist/css/bootstrap.css')
-
+/* Adds support for URLSearchParams() in IE*/
+require('url-search-params-polyfill');
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>',
+    el: '#app',
+    components: { App },
+    template: '<App/>',
     store: store,
 })

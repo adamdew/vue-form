@@ -23,10 +23,10 @@
                             name="Scientific Sessions"
                             factor="Ophthalmic Nurse"
                     ></PricingRow>
-                    <PricingRow
-                            name="Scientific Sessions"
-                            factor="In-Training"
-                    ></PricingRow>
+                    <!--<PricingRow-->
+                            <!--name="Scientific Sessions"-->
+                            <!--factor="In-Training"-->
+                    <!--&gt;</PricingRow>-->
                     <tr>
                         <th>Office Administrator Program<br/>(Saturday, June 9)</th>
                         <th></th>
