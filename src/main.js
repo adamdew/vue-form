@@ -5,6 +5,11 @@ import Vuex from 'vuex'
 import App from './App'
 import { store } from './store'
 import VeeValidate from 'vee-validate'
+import VueRouter from 'vue-router'
+import router from './router';
+// import GuestTickets from '@/components/GuestTickets'
+
+
 
 Vue.use(Vuex);
 Vue.use(VeeValidate);
@@ -19,4 +24,5 @@ new Vue({
     components: { App },
     template: '<App/>',
     store: store,
+    router
 })

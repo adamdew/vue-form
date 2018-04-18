@@ -145,13 +145,16 @@
                 </div>
             </div>
         </div>
+       
     </div>
+    
 </template>
 <script>
 
     import {mapGetters} from 'vuex';
     import FormReceipt from './FormReceipt'
     import PricingRow from './PricingRow'
+    
 
     export default {
         computed: {
@@ -172,7 +175,7 @@
         },
         components: {
             FormReceipt,
-            PricingRow
+            PricingRow,
         },
         mounted() {
             this.fetchPrices();
