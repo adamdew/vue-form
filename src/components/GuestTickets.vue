@@ -61,6 +61,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br/>
+                <router-link style='float:right' class="btn btn-info" to="/">
+                    Next <small>(Checkout)</small>
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -116,7 +124,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .smaller-cont {
         width: 80%;
         margin: 0 auto;

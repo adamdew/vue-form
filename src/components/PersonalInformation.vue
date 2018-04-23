@@ -152,6 +152,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br/>
+                <router-link style='float:right' class="btn btn-info" to="/GuestTickets">
+                    Next <small>(Guest Tickets)</small>
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -171,7 +179,6 @@
         },
         methods: {
             updateState(exp) {
-                //dont think that the below line is needed buttt, ill keep it for now
                 this.$store.commit('updatePersonalInfo', this.state, exp);
                 this.$store.commit('fieldCompleted', exp);
             }

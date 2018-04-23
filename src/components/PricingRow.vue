@@ -5,11 +5,12 @@
         <td>${{ regular.price }}</td>
         <td>
             <input
-                    class="form-check-input"
-                    type="radio"
-                    name="registration"
-                    :value="earlyBird.PRODUCTID"
-                    v-model="state.session">
+                class="form-check-input"
+                type="radio"
+                name="registration"
+                :value="earlyBird.PRODUCTID"
+                v-model="state.session"
+                @change="updateState()">
         </td>
     </tr>
     <tr v-else>
@@ -18,19 +19,20 @@
         <td>${{ regular.price }}</td>
         <td>
             <input
-                    class="form-check-input"
-                    type="radio"
-                    name="registration"
-                    :value="regular.PRODUCTID"
-                    v-model="state.session">
+                class="form-check-input"
+                type="radio"
+                name="registration"
+                :value="regular.PRODUCTID"
+                v-model="state.session"
+                @change="updateState()">
         </td>
     </tr>
 </template>
 
 <script>
-
+    
     import {mapGetters} from 'vuex';
-
+    
     export default {
         computed: {
             ...mapGetters({
@@ -69,14 +71,17 @@
                         return data.description === null || data.description.includes(description);
                     }
                 );
-
-
+                
+                
                 if (product[0]) {
                     return product[0];
                 }
                 else {
                     return 0;
                 }
+            },
+            updateState(){
+                this.$store.commit('updateState', this.state);
             }
         }
     }

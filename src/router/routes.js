@@ -3,6 +3,7 @@ import PersonalInformation from '../components/PersonalInformation'
 import GuestTickets from '../components/GuestTickets'
 
 export default [
+    { path: '/', redirect: '/Sessions' },
     {
         path: '/Sessions',
         alias: '/',

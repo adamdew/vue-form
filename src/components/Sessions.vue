@@ -80,6 +80,7 @@
                                 name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.cornea.PRODUCTID"
                                 v-model="state.breakoutSession"
+                                @change="updateState()"
                         />
                         {{ pricing.saturdayBreakouts.cornea.description }}
                     </label>
@@ -91,6 +92,7 @@
                                 name="sessionsRadios"
                                 :value="pricing.saturdayBreakouts.glaucoma.PRODUCTID"
                                 v-model="state.breakoutSession"
+                                @change="updateState()"
                         />
                         {{ pricing.saturdayBreakouts.glaucoma.description }}
                     </label>
@@ -145,7 +147,14 @@
                 </div>
             </div>
         </div>
-       
+        <br/>
+        <div class="row">
+            <div class="col-sm-12">
+                <router-link style='float:right' class="btn btn-info" to="/PersonalInformation">
+                    Next <small>(Contact Info)</small>
+                </router-link>
+            </div>
+        </div>
     </div>
     
 </template>
@@ -199,6 +208,9 @@
                     return 0;
                 }
             },
+            updateState(){
+                this.$store.commit('updateState', this.state);
+            }
         }
     }
 </script>

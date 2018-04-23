@@ -1,5 +1,21 @@
 <template>
     <div id="app" class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-pills justify-content-center">
+                    <router-link tag="li" class="nav-item" active-class="active" to="/Sessions">
+                        <a class="nav-link">Sessions</a>
+                    </router-link>
+                    <router-link tag="li" class="nav-item" active-class="active" to="/PersonalInformation">
+                        <a class="nav-link">Contact Info</a>
+                    </router-link>
+                    <router-link tag="li" class="nav-item" active-class="active" to="/GuestTickets">
+                        <a class="nav-link">Guests</a>
+                    </router-link>
+                </ul>
+                
+            </div>
+        </div>
         <transition name="component-fade" mode="out-in">
             <div v-if="nameIsSet">
                 <div class="alert alert-info" role="alert">
@@ -42,16 +58,13 @@
                     </div>
                 </div>
             </transition>
-            <div class="row">
-                <div class="col-sm-12">
-                    <!--<button style='float:right' id="next-btn" class="btn btn-info">Next</button>-->
-                    <!--<button style='float:left' class="btn btn-default">Previous</button>-->
-                    <router-link style='float:right' class="btn btn-info" :to="currentView"
-                                 @click="incrementProgress">Next
-                    </router-link>
-                    <router-link style='float:left' class="btn btn-info" :to="previousView" @click="decrementProgress">Previous</router-link>
-                </div>
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="col-sm-12">-->
+                    <!--<button style='float:right' id="next-btn" class="btn btn-info"-->
+                            <!--@click="nextPage()">Next-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
         
         </div>
     </div>
@@ -76,16 +89,6 @@
             UserInfo,
             GuestTickets
         },
-        data: function () {
-            return {
-                currentCount: 1,
-                appFlow: [
-                    'Sessions',
-                    'PersonalInformation',
-                    'GuestTickets'
-                ]
-            }
-        },
         computed: {
             ...mapGetters({
                 state: 'getState',
@@ -109,36 +112,9 @@
                     return true;
                 }
             },
-            currentView(){
-              return this.appFlow[this.currentCount];
-            },
-            previousView(){
-                if(this.currentCount == 0){
-                    return this.appFlow[this.currentCount];
-                }
-                else{
-                    return this.appFlow[this.currentCount - 1];
-                }
-                
-            },
-        },
-        mounted: function () {
-            var pathToModule = require.resolve('strip-ansi');
-            console.log(pathToModule);
         },
         methods: {
-            incrementProgress() {
-                this.currentCount++;
-            },
-            decrementProgress() {
-                if(this.currentCount == 0){
-                
-                }
-                else{
-                    this.currentCount++;
-                }
-                
-            },
+        
         }
     }
 </script>
@@ -177,13 +153,21 @@
         border-radius: 0 0 4px 4px;
         border-top: 1px solid transparent;
     }
-    
+    /*.router-link-active{*/
+        /*background-color: #a7a7a7;*/
+        /*color: white;*/
+    /*}*/
     .review-container {
         background-color: #dddddd40;
         border-radius: 4px;
     }
-    
+    .active {
+        background-color: #f6f6f6;
+    }
     hr {
         color: black;
+    }
+    .nav {
+        margin-bottom:1rem;
     }
 </style>

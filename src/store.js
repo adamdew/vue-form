@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex);
 
@@ -12,7 +13,6 @@ const apiConfig = {
     method: 'post',
     url: 'https://www.ophmasters.com/registration/reg_api.php',
 };
-
 const usStates = [
     {
         "name": "Alabama",
@@ -499,9 +499,6 @@ const countries = [
 
 export const store = new Vuex.Store({
     state: {
-        panelRouting: {
-            active: 1,
-        },
         personalInfo: {
             panelId: 2,
             firstName: '',
@@ -554,12 +551,16 @@ export const store = new Vuex.Store({
         stateList: usStates,
         countryList: countries
     },
+    plugins:[createPersistedState()],
     getters: {
         getState(state) {
             return state;
         }
     },
     mutations: {
+        updateState(state, newState){
+            state = newState;
+        },
         updatePersonalInfo(state, newState, element) {
             state.personalInfo[element] = newState.personalInfo[element];
         },
@@ -616,6 +617,7 @@ export const store = new Vuex.Store({
             state.guests.push(guest);
         }
     },
+
 });
 
 function search(nameKey, myArray) {
