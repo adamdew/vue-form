@@ -4,39 +4,48 @@
         <div  class="table table-sm" style="margin-top:10px">
             <h4 style="padding:10px">Items</h4>
             <tr>
-                <th>Product Name</th>
-                <th style="text-align: right">Price</th>
+                <th><small>Product Name</small></th>
+                <th style="text-align: right"><small>Price</small></th>
             </tr>
             <tr v-if="state.session">
-                <td>{{ selectedSession.name }} - {{selectedSession.factor}}
+                <td>
+                    <small>{{ selectedSession.name }} - {{selectedSession.factor}}</small>
                 </td>
 
-                <td style="text-align: right">${{ selectedSession.price }}</td>
+                <td style="text-align: right">
+                    <small>${{ selectedSession.price }}</small>
+                </td>
             </tr>
             <tr v-if="state.breakoutSession">
-                <td>{{ breakoutSession.name+" - "+breakoutSession.description}}
+                <td>
+                    <small>{{ breakoutSession.name+" - "+breakoutSession.description}}</small>
                 </td>
 
-                <td style="text-align: right">${{ breakoutSession.price }}</td>
+                <td style="text-align: right">
+                    <small>${{ breakoutSession.price }}</small>
+                </td>
             </tr>
             <tr v-if="state.yoSeminar">
-                <td>{{ yoSeminar.name+" - "+yoSeminar.description}}
+                <td>
+                    <small>{{ yoSeminar.name+" - "+yoSeminar.description}}</small>
                 </td>
-
-                <td style="text-align: right">${{ yoSeminar.price }}</td>
+                <td style="text-align: right">
+                    <small>${{ yoSeminar.price }}</small>
+                </td>
             </tr>
             <tr v-for="guestTicket in state.guests">
                 <td>
-                    {{ guestTicket.guestTicketType+" - "+guestTicket.guestName}}
+                    <small>{{ guestTicket.guestTicketType+" - "+guestTicket.guestName}}</small>
                 </td>
-                <td style="text-align: right">${{ guestTicket.price }}</td>
+                <td style="text-align: right">
+                    <small>${{ guestTicket.price }}</small>
+                </td>
             </tr>
             <tr>
-                <td style="text-align: right"><strong>Subtotal:</strong></td>
-                <td style="text-align: right"><strong>$<u>{{ this.subTotal }}</u></strong></td>
+                <td><h4>Total:</h4></td>
+                <td style="text-align: right"><h4>${{ this.subTotal }}</h4></td>
             </tr>
         </div>
-
     </div>
 </template>
 
@@ -67,7 +76,8 @@
             },
             subTotal: function (){
                 let subTotal = parseInt(this.selectedSession.price) + parseInt(this.guestTotal);
-                return subTotal;
+                this.state.cartTotal = subTotal;
+                return subTotal.toFixed(2);
             }
         },
         methods: {

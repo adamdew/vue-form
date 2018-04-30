@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
 
 Vue.use(Vuex);
 
@@ -548,8 +549,15 @@ export const store = new Vuex.Store({
         breakoutSession: '',
         yoSeminar: '',
         guests: [],
+        cartTotal: '',
         stateList: usStates,
-        countryList: countries
+        countryList: countries,
+        ccinfo : {
+            number: '',
+            name: '',
+            expiry: '',
+            cvc: ''
+        }
     },
     plugins:[createPersistedState()],
     getters: {

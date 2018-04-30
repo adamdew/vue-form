@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <br/>
-                <router-link style='float:right' class="btn btn-info" to="/">
+                <router-link style='float:right' class="btn btn-info" to="/Checkout">
                     Next <small>(Checkout)</small>
                 </router-link>
             </div>
@@ -101,7 +101,7 @@
                     guestTicketType: 'Leadership Luncheon Guest Ticket',
                     guestName: this.guestName,
                     guestEmail: this.guestEmail,
-                    price: 100.00,
+                    price: '100.00',
                 });
             },
             addAdultGuest(){
@@ -109,7 +109,7 @@
                     guestTicketType: 'Adult Guest Ticket',
                     guestName: this.guestName,
                     guestEmail: this.guestEmail,
-                    price: 80.00,
+                    price: '80.00',
                 });
             },
             addChildGuest(){
@@ -117,7 +117,7 @@
                     guestTicketType: 'Child Guest',
                     guestName: this.guestName,
                     guestEmail: this.guestEmail,
-                    price: 80.00,
+                    price: '80.00',
                 });
             }
         }

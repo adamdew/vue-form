@@ -4,23 +4,25 @@
             <div class="col-sm-12">
                 <ul class="nav nav-pills justify-content-center">
                     <router-link tag="li" class="nav-item" active-class="active" to="/Sessions">
-                        <a class="nav-link">Sessions</a>
+                        <a class="nav-link text-center">Step 1<br/> <small>Programs & Sessions</small></a>
                     </router-link>
                     <router-link tag="li" class="nav-item" active-class="active" to="/PersonalInformation">
-                        <a class="nav-link">Contact Info</a>
+                        <a class="nav-link text-center">Step 2<br/>  <small>Attendee Info</small></a>
                     </router-link>
                     <router-link tag="li" class="nav-item" active-class="active" to="/GuestTickets">
-                        <a class="nav-link">Guests</a>
+                        <a class="nav-link text-center">Step 3<br/>  <small>Guest Tickets</small></a>
+                    </router-link>
+                    <router-link tag="li" class="nav-item" active-class="active" to="/Checkout">
+                        <a class="nav-link text-center">Step 4<br/>  <small>Checkout</small></a>
                     </router-link>
                 </ul>
-                
             </div>
         </div>
         <transition name="component-fade" mode="out-in">
             <div v-if="nameIsSet">
                 <div class="alert alert-info" role="alert">
                     Hello, <strong>{{ state.personalInfo.firstName }} {{ state.personalInfo.lastName
-                    }}, {{ state.personalInfo.degree }}</strong>
+                    }}, {{ state.personalInfo.degree }} <small>&nbsp;&nbsp;(Your progress is saved, you may navigate away from this form.)</small></strong>
                 </div>
             </div>
         </transition>
@@ -34,7 +36,7 @@
                 <div class="container review-container">
                     <FormReceipt></FormReceipt>
                 </div>
-                <div v-if="nameIsSet" class="container review-container">
+                <div v-if="nameIsSet" class="container review-container" style="background-color: #f6f6f6;border-radius: 5px;">
                     <UserInfo></UserInfo>
                 </div>
             </div>
@@ -44,7 +46,6 @@
                 <transition name="component-fade" mode="out-in">
                     <router-view></router-view>
                 </transition>
-                <!--<FormControl/>-->
             </div>
         </div>
         <div class="form-buttons">
@@ -58,14 +59,6 @@
                     </div>
                 </div>
             </transition>
-            <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<button style='float:right' id="next-btn" class="btn btn-info"-->
-                            <!--@click="nextPage()">Next-->
-                    <!--</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        
         </div>
     </div>
 </template>
@@ -153,12 +146,7 @@
         border-radius: 0 0 4px 4px;
         border-top: 1px solid transparent;
     }
-    /*.router-link-active{*/
-        /*background-color: #a7a7a7;*/
-        /*color: white;*/
-    /*}*/
     .review-container {
-        background-color: #dddddd40;
         border-radius: 4px;
     }
     .active {
@@ -169,5 +157,8 @@
     }
     .nav {
         margin-bottom:1rem;
+    }
+    .nav-pills li {
+        width:11vw;
     }
 </style>
