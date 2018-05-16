@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="panel-title">Additional Sponsorship Opportunities</h2>
+            <h2 class="panel-title">Additional Sponsorship Opportunities <small>Click on title for descriptions</small></h2>
         </div>
         <div class="panel-body">
             <table class="table table__ticket">

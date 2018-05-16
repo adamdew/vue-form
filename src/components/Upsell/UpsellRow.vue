@@ -9,7 +9,8 @@
 
 
         <td nowrap="nowrap" align="center">
-            {{ item.available }}
+            <span v-if="item.available < 9999">{{ item.available }}</span>
+            <span v-else>Unlimited</span>
         </td>
         <td nowrap="nowrap" class="price_td">
             {{ item.price | formatMoney }}

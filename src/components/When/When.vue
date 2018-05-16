@@ -1,5 +1,5 @@
 <template>
-    <div class="panel panel-default">
+    <div class="panel panel-default hidden-xs">
         <div class="panel-heading">
             <h2 class="panel-title">When & Where</h2>
         </div>

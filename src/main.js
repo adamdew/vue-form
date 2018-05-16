@@ -34,8 +34,6 @@ Vue.http.options.root = 'http://www.ophmasters.com/new-exhibitor/exhibitor-endpo
 Vue.http.get('data')
     .then(response => response.json())
     .then((data) => {
-
-
         new Vue({
             el: '#app',
             store: store(data),

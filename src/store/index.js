@@ -6,6 +6,7 @@ import CompanyInfo from './cart/modules/company-info'
 import Payment from './cart/modules/payment'
 import Cart from './cart/modules/cart'
 
+
 Vue.use(Vuex)
 
 function builder(data) {

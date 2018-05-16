@@ -174,29 +174,11 @@
 
     export default {
         name: 'CompanyInfo',
-        data: () => ({
-            company_name: '',
-            last_name: ''
-        }),
         inject: ['$validator'],
         computed: {
             ...mapState({
                 CompanyInfo: state => state.CompanyInfo
-            }),
-            isFormValid: function () {
-                return 'b';
-                this.$validator.validateAll().then((result) => {
-                    console.log(result);
-                    if (result) {
-                        // eslint-disable-next-line
-                        return 'ture';
-                    }
-                    return 'false'
-                });
-            }
-        },
-        methods: {
-//
+            })
         }
     }
 

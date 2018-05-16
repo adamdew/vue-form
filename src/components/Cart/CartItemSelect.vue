@@ -26,9 +26,6 @@
             },
         },
         methods: {
-            ...mapMutations([
-                'UPDATE_CART'
-            ]),
             ...mapActions([
                 'addToCart'
             ]),

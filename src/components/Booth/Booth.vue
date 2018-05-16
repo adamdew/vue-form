@@ -4,7 +4,6 @@
             <h2 class="panel-title">Booth Registration</h2>
         </div>
         <div class="panel-body">
-
             <table class="table table__ticket">
                 <tbody>
                     <tr class="ticket_table_head">
@@ -24,10 +23,10 @@
                             :start_date="item.start_date"
                             :end_date="item.end_date"
                             :description="item.description"
+                            :category="item.category"
                     />
                 </tbody>
             </table>
-
         </div>
     </div>
 </template>

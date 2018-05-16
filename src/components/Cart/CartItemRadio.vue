@@ -22,11 +22,7 @@
         props: ['id', 'price', 'name', 'type'],
         computed: {
             cart: {
-                get: function(a) {
-                console.log(a)
-                },
                 set: function (newValue) {
-
                     this.$store.state.cart.push(newValue)
                 },
                 unset: function(oldVal) {

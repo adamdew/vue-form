@@ -5,33 +5,36 @@ const state = {
         value: null,
         valid: false
     },
-    cartItemList: []
-}
+    cartItemList: [],
+    badgeCount: null,
+    freeBadgeCount: null,
+    freeBadgeMaxCount: null
+};
 
 const mutations = {
-    'UPDATE_PROMO_CODE' (state, promoCode) {
+    'UPDATE_PROMO_CODE'(state, promoCode) {
         state.promoCode = promoCode;
     },
-    'UPDATE_CART' (state, product) {
+    'UPDATE_CART'(state, product) {
         const record = state.cartItemList.find(element => element.id == product.id);
-
         if (record) {
             if (false) {
                 record.quantity += quantity;
             } else {
                 record.quantity = product.quantity;
             }
+            record.ran = Date.now();
         } else {
             state.cartItemList.push(product);
         }
     },
-    'SET_CART' (state, productList) {
+    'SET_CART'(state, productList) {
         if (productList) {
             state.cartItemList = productList;
         }
     },
-    'REMOVE_CART_ITEM' (state, {item}) {
-        const record = state.cartItemList.find(element => element.id == item.id);
+    'DELETE_FROM_CART'(state, product) {
+        const record = state.cartItemList.find(element => element.id == product.id);
         state.cartItemList.splice(state.cartItemList.indexOf(record), 1);
     }
 }
@@ -60,6 +63,36 @@ const getters = {
     },
     getPromoCode: (state) => {
         return state.promoCode;
+    },
+    getBadgeCount: (state) => {
+        let count = 0;
+        state.cartItemList.map((item, idx) => {
+            if (item.category === 'Badge') {
+                count++
+            }
+        });
+        return count;
+    },
+    getFreeBadgeCount: (state) => {
+        let count = 0;
+        state.cartItemList.map((item, idx) => {
+            if (item.category === 'Badge' && item.price === 0) {
+               count++
+            }
+        });
+        return count;
+    },
+    getFreeBadgeMaxCount: (state) => {
+        let count = 0;
+        state.cartItemList.map((item, idx) => {
+            if (item.category === 'booth' && item.quantity > 0) {
+               count += item.quantity * 2;
+            }
+        });
+        return count;
+    },
+    getBadges: (state) => {
+        return state.cartItemList.filter(item => item.category === 'Badge');
     }
 }
 

@@ -5,3 +5,7 @@ export const addToCart = ({ commit }, product) => {
 export const updatePromoCode = ({ commit }, promoCode) => {
     commit('UPDATE_PROMO_CODE', promoCode)
 }
+
+export const deleteFromCart = ({ commit }, product) => {
+    commit('DELETE_FROM_CART', product)
+}

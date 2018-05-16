@@ -6,7 +6,6 @@
             <div v-html="description" class="description"></div>
         </td>
 
-
         <td nowrap="nowrap">
             <span v-if="isExpired()">
                 Sale Ended
@@ -19,18 +18,13 @@
             </span>
         </td>
 
-
         <td nowrap="nowrap" class="price_td">
-            <input type="hidden" name="cost_83094570_None" value="230.00">
-
             {{ price | formatMoney }}
-
         </td>
 
         <td align="right" nowrap="nowrap">
-
             <span v-if="isOpen()">
-                <CartItemSelect :product="{id,name,price,start_date,end_date,description,max_quantity:5}"/>
+                <CartItemSelect :product="{id,name,price,start_date,end_date,description,category,max_quantity:5}"/>
             </span>
             <strong v-else>
                 N/A
@@ -60,6 +54,7 @@
             'start_date',
             'end_date',
             'description',
+            'category'
         ],
         components: {
             CartItemSelect

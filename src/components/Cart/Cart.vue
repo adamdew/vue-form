@@ -12,8 +12,11 @@
                     <td class="text-center">Quantity</td>
                     <td class="text-center">Subtotal</td>
                 </td>
-                <tr v-for="cartItem in cartItemList" :cartItem="cartItem" :key="cartItem.id" v-if="cartItem.quantity > 0">
-                    <td>{{ cartItem.name }}</td>
+                <tr v-for="cartItem in Cart.cartItemList" :cartItem="cartItem" :key="cartItem.id" v-if="cartItem.quantity > 0">
+                    <td>
+                        {{ cartItem.name }}
+                        <span v-if="cartItem.category === 'Badge' && cartItem.attributes.name != ''">- {{ cartItem.attributes.name }}</span>
+                    </td>
                     <td align="center">{{ cartItem.price | formatMoney }}</td>
                     <td align="center">{{ cartItem.quantity }}</td>
                     <td align="right">{{ (cartItem.price * cartItem.quantity) | formatMoney }}</td>
@@ -24,7 +27,7 @@
                 </tr>
                 <tr>
                     <th colspan="3">Order total:</th>
-                    <th style="text-align: right">{{ cartValueLocal | formatMoney }}</th>
+                    <th style="text-align: right">{{ this.cartValue | formatMoney }}</th>
                 </tr>
                 <tr v-if="!promo">
                     <td colspan="4" align="right"><a href="#" @click="promo = true">Enter promotional code</a></td>
@@ -53,13 +56,8 @@
             }
         },
         computed: {
-            ...mapState(['Cart']),
-            cartItemList() {
-                return this.$store.getters.cartItemList;
-            },
-            cartValueLocal() {
-                return this.$store.getters.cartValue;
-            },
+            ...mapState(['Cart', 'api_endpoint']),
+            ...mapGetters(['cartValue']),
             isPromoValid() {
                 if (this.$store.getters.getPromoCode.valid) {
                     return true;
@@ -91,7 +89,7 @@
 
                 axios({
                     method: "POST",
-                    url: "https://www.ophmasters.com/new-exhibitor/promo.php",
+                    url: this.api_endpoint + "/promo.php",
                     data: {promo_code},
                     headers: {
                             "content-type": "multipart/form-data"
