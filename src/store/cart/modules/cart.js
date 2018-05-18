@@ -18,8 +18,8 @@ const mutations = {
     'UPDATE_CART'(state, product) {
         const record = state.cartItemList.find(element => element.id == product.id);
         if (record) {
-            if (false) {
-                record.quantity += quantity;
+            if (product.quantity == 0) {
+                state.cartItemList.splice(state.cartItemList.indexOf(record), 1);
             } else {
                 record.quantity = product.quantity;
             }

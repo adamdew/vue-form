@@ -35,8 +35,8 @@
                     <Cart/>
                     <CompanyInfo/>
                     <Payment/>
-                    <button v-on:click="submit" class="btn btn-primary btn-lg">Complete Order</button>
                     <button v-on:click="goBack" class="btn btn-lg btn-default">Back</button>
+                    <button v-on:click="submit" class="btn btn-primary btn-lg pull-right">Complete Order</button>
                 </div>
                 <div class="col-sm-4 hidden-xs">
                     <When/>

@@ -11,7 +11,7 @@
                     <td class="text-center">Price</td>
                     <td class="text-center">Quantity</td>
                     <td class="text-center">Subtotal</td>
-                </td>
+                </tr>
                 <tr v-for="cartItem in Cart.cartItemList" :cartItem="cartItem" :key="cartItem.id" v-if="cartItem.quantity > 0">
                     <td>
                         {{ cartItem.name }}
@@ -26,8 +26,8 @@
                     <td colspan="3" align="right">{{ promo_code_value | formatMoney }}</td>
                 </tr>
                 <tr>
-                    <th colspan="3">Order total:</th>
-                    <th style="text-align: right">{{ this.cartValue | formatMoney }}</th>
+                    <td colspan="3" style="vertical-align: middle;" class="f14">Total</td>
+                    <th style="text-align: right" class="f16">{{ this.cartValue | formatMoney }}</th>
                 </tr>
                 <tr v-if="!promo">
                     <td colspan="4" align="right"><a href="#" @click="promo = true">Enter promotional code</a></td>

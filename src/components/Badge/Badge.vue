@@ -48,8 +48,8 @@
                 <tfoot>
                     <tr>
                         <td align="left" colspan="4">
-                            <button class="btn btn-primary btn-sm" v-on:click="addFreeBadge">Add a Free Badge (<span>{{ this.totalFreeBadgesMax - this.totalFreeBadges }}</span> remaining)</button>
-                            <button class="btn btn-primary btn-sm" v-on:click="addPaidBadge">Add a Badge ($50)</button>
+                            <button class="btn btn-action btn-sm" v-on:click="addFreeBadge" :disabled="this.totalFreeBadgesMax - this.totalFreeBadges <= 0">Add a Free Badge (<span>{{ this.totalFreeBadgesMax - this.totalFreeBadges }}</span> remaining)</button>
+                            <button class="btn btn-action btn-sm" v-on:click="addPaidBadge">Add a Badge ($50)</button>
                         </td>
                     </tr>
                 </tfoot>
