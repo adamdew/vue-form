@@ -1,0 +1,186 @@
+.table__ticket {
+    margin-bottom: 0px;
+}
+.ticket_table_head {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 1px;
+}
+
+.ticket_table_head td {
+    border-top: 0px!important;
+}
+.ticket_row td {
+    vertical-align: top;
+    padding: 12px 5px!important;
+}
+
+.ticket_row .ticket_type_name {
+    font-weight:700
+}
+.ticket_row .ticket_type_name .description {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 5px 0 0 0;
+    font-weight: normal;
+}
+.ticket_row .ticket_type_name .description ul {
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+}
+
+.event_header {
+    margin-top: 30px;
+    border-bottom: 1px dotted #D5D5D3;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+}
+.event_header h1 {
+    font-size: 26px;
+    line-height: 28px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.event_header h2 {
+    font-size: 17px;
+    text-align: left;
+    line-height: 21px;
+    color: #4d051a;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}
+
+
+.upsell-description {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 5px 0 0 0;
+    font-weight: normal;
+}
+
+.arrow-down {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAJCAYAAAAGuM1UAAAARElEQVR4AZXLoQ3AMBAEwXFP7ielpcvHIQdPLwUs24HzMw8Gd5kuJq8Xs6DMJq9TUZ9PQEF1DmiozwELyryBoDp3sPcBE+gdTR3BcJAAAAAASUVORK5CYII=);
+    background-size: 100% 100%;
+    float: right;
+    height: 9px;
+    margin: 5px;
+    width: 12px;
+    opacity: 0.38;
+    transform: translateZ(0);
+    -webkit-transition: opacity 300ms ease-out;
+}
+
+.arrow-down.opened {
+    opacity: 0.54;
+    transform: rotateX(180deg);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+    /* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.table_row__expired {
+}
+
+.block {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.delete-badge {
+    cursor: pointer;
+    padding: 5px;
+}
+
+
+/***
+ * Modal
+ */
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-container {
+    width: 90%;
+    max-width: 360px;
+    margin: 0px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-footer {
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+.modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+}
+
+.modal-body {
+    margin: 20px 0;
+}
+
+.modal-default-button {
+    float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
