@@ -11,8 +11,10 @@
     import { mapMutations, mapActions } from 'vuex';
 
     export default {
-        data: {
-            maxSelectQuantityValue: 0
+        data: function() {
+            return {
+                maxSelectQuantityValue: 0
+            }
         },
         props: {
             product: Object

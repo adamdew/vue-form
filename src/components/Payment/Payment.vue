@@ -147,8 +147,10 @@
 
     export default {
         name: 'Payment',
-        data: {
-            isCredit: false
+        data: function() {
+            return {
+                isCredit: false
+            }
         },
         computed: mapState({
             Payment: state => state.Payment
