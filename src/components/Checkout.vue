@@ -3,7 +3,7 @@
         <div class="form-section-head">
             <h4>Checkout</h4>
         </div>
-        <div class="form-section-body container-fluid" >
+        <div class="form-section-body container-fluid">
             <div class="row">
             </div>
             <div class="credit-card-wrapper"></div>
@@ -11,7 +11,8 @@
                 
                 <div class="row">
                     <div class="col-sm-6">
-                        <input placeholder="Card number" type="text" name="number" id="number" v-model="state.ccinfo.number">
+                        <input placeholder="Card number" type="text" name="number" id="number"
+                               v-model="state.ccinfo.number">
                     </div>
                     <div class="col-sm-6">
                         <input placeholder="Full name" type="text" name="name" id="name" v-model="state.ccinfo.name">
@@ -21,18 +22,19 @@
                     <div class="col-sm-3">
                         <input placeholder="MM/YY" type="text" name="expiry" id="expiry" v-model="state.ccinfo.expiry">
                     </div>
-            
+                    
                     <div class="col-sm-3">
                         <input placeholder="CVC" type="text" name="cvc" id="cvc" v-model="state.ccinfo.cvc">
                     </div>
-            
+                    
                     <div class="col-sm-6">
-                        <input type="button" :value="payButtonTotal" @click="submitPayment" class="button postfix btn-info">
+                        <input type="button" :value="payButtonTotal" @click="submitPayment"
+                               class="button postfix btn-info">
                     </div>
                 </div>
             </form>
         </div>
-        
+    
     </div>
 </template>
 
@@ -40,15 +42,14 @@
     import {mapGetters} from 'vuex';
     
     
-    
     export default {
         computed: {
             ...mapGetters({
                 state: 'getState',
             }),
-            payButtonTotal(){
+            payButtonTotal() {
                 let output = this.state.cartTotal;
-                output = "Pay $"+output;
+                output = "Pay $" + output;
                 return output;
             }
         },
@@ -60,7 +61,7 @@
                 deep: true
             }
         },
-        mounted: function(){
+        mounted: function () {
             var $ = require("jquery");
             window.jQuery = $;
             var card = require("card");
@@ -71,23 +72,21 @@
                 // a selector or DOM element for the container
                 // where you want the card to appear
                 container: '.credit-card-wrapper', // *required*
-        
                 formSelectors: {
                     numberInput: 'input#number', // optional — default input[name="number"]
                     expiryInput: 'input#expiry', // optional — default input[name="expiry"]
                     cvcInput: 'input#cvc', // optional — default input[name="cvc"]
                     nameInput: 'input#name' // optional - defaults input[name="name"]
                 },
-        
                 width: 300, // optional — default 350px
                 formatting: true, // optional - default true
-        
+                
                 // Strings for translation - optional
                 messages: {
                     validDate: 'valid\ndate', // optional - default 'valid\nthru'
                     monthYear: 'mm/yyyy', // optional - default 'month/year'
                 },
-        
+                
                 // Default placeholders for rendered fields - optional
                 placeholders: {
                     number: '•••• •••• •••• ••••',
@@ -95,32 +94,34 @@
                     expiry: '••/••',
                     cvc: '•••'
                 },
-        
                 masks: {
                     cardNumber: '' // optional - mask card number
                 },
-        
                 // if true, will log helpful messages for setting up Card
                 debug: false // optional - default false
             });
         },
         methods: {
-            submitPayment(){
-                const authData = {};
-                authData.clientKey = "7vvR9BZ78d772Zqe";
-                authData.apiLoginID = "37JhUz2c";
+            submitPayment() {
+                const authData = {
+                    clientKey: "7vvR9BZ78d772Zqe",
+                    apiLoginID: "37JhUz2c"
+                };
+                
+                let cardData = {
+                    cardNumber: this.state.ccinfo.number,
+                    month: this.state.ccinfo.expiry[0],
+                    year: this.state.ccinfo.expiry[1],
+                    cardCode: this.state.ccinfo.number,
+                };
+                
+                const secureData = {};
+                
     
-                // let cardData = {
-                //     cardNumber:this.state.ccinfo.number
-                //     month:this.state.ccinfo.expiry
-                // year:this.state.ccinfo.number
-                // cardCode:this.state.ccinfo.number
-                // };
-                // cardData.cardNumber = this.state.ccinfo.number;
-                // cardData.month = this.state.ccinfo.month;
-                // cardData.year = this.state.ccinfo.year;
-                // cardData.cardCode = this.state.ccinfo.cardCode;
-            
+                Accept.dispatchData(secureData, function(response){
+                    console.log(response);
+                });
+                
             },
             showAdult() {
                 this.adultVisible = true;
@@ -128,7 +129,7 @@
             showChild() {
                 this.adultVisible = false;
             },
-            addAdultGuestLuncheon(){
+            addAdultGuestLuncheon() {
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Leadership Luncheon Guest Ticket',
                     guestName: this.guestName,
@@ -136,7 +137,7 @@
                     price: 100.00,
                 });
             },
-            addAdultGuest(){
+            addAdultGuest() {
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Adult Guest Ticket',
                     guestName: this.guestName,
@@ -144,7 +145,7 @@
                     price: 80.00,
                 });
             },
-            addChildGuest(){
+            addChildGuest() {
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Child Guest',
                     guestName: this.guestName,
@@ -175,7 +176,8 @@
         background-color: #a7a7a7;
         color: white;
     }
-    #payment-form input[type="text"]{
+    
+    #payment-form input[type="text"] {
         -webkit-appearance: none;
         -moz-appearance: none;
         border-radius: 0;
@@ -199,10 +201,12 @@
         -webkit-transition: border-color 0.15s linear, background 0.15s linear;
         transition: border-color 0.15s linear, background 0.15s linear;
     }
-    #payment-form div[class*=col]{
+    
+    #payment-form div[class*=col] {
         padding-left: 0;
         padding-right: 0;
     }
+    
     .postfix.button {
         border: none;
         padding-left: 0;
