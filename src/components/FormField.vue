@@ -23,12 +23,12 @@
     import { mapGetters } from 'vuex';
     import { Validator } from 'vee-validate';
 
-    Validator.extend('newRule', {
+    Validator.extend('isComplete', {
         getMessage(field, params, data) {
-            return (data && data.message) || "It's just not me";
+            return (data && data.message) || "Field Incomplete";
         },
         validate(value) {
-            if(value == 'Adam'){
+            if(value.length > 0){
                 return true;
             }
             else{

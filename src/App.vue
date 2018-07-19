@@ -6,13 +6,13 @@
                     <router-link tag="li" class="nav-item" active-class="active" to="/Sessions">
                         <a class="nav-link text-center">Step 1<br/> <small>Programs & Sessions</small></a>
                     </router-link>
-                    <router-link tag="li" class="nav-item" active-class="active" to="/PersonalInformation">
+                    <router-link v-if="sessionIsSet" tag="li" class="nav-item" active-class="active" to="/PersonalInformation">
                         <a class="nav-link text-center">Step 2<br/>  <small>Attendee Info</small></a>
                     </router-link>
-                    <router-link tag="li" class="nav-item" active-class="active" to="/GuestTickets">
+                    <router-link v-if="sessionIsSet" tag="li" class="nav-item" active-class="active" to="/GuestTickets">
                         <a class="nav-link text-center">Step 3<br/>  <small>Guest Tickets</small></a>
                     </router-link>
-                    <router-link tag="li" class="nav-item" active-class="active" to="/Checkout">
+                    <router-link v-if="attendeeInfoComplete" tag="li" class="nav-item" active-class="active" to="/Checkout">
                         <a class="nav-link text-center">Step 4<br/>  <small>Checkout</small></a>
                     </router-link>
                 </ul>
@@ -50,11 +50,15 @@
         </div>
         <div class="form-buttons">
             <transition name="component-fade" mode="out-in">
-                <div id="warnings" class="row">
+                <div v-if="showErrors" id="warnings" class="row">
                     <div class="col-sm-12">
-                        <div v-if="state.incomplete.length !== 0" class="alert alert-info" role="alert">
-                            There are {{state.incomplete.length}} incomplete fields in your submission, please fill them
-                            out before finishing.
+                        <div class="alert alert-info" role="alert">
+                            There are some errors with your registration
+                            <ul>
+                                <li v-for="error in state.errors">
+                                    {{error.msg}}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -86,6 +90,17 @@
             ...mapGetters({
                 state: 'getState',
             }),
+            showErrors: function(){
+
+                if(this.state.errors.length > 0 ){
+                    return true;
+                    //console.log(this.state.errors);
+                }
+                else{
+                    return false;
+                    //console.log(this.state.errors);
+                }
+            },
             nameIsSet: function () {
                 if (this.state.personalInfo.firstName == '') {
                     return false;
@@ -105,6 +120,14 @@
                     return true;
                 }
             },
+            attendeeInfoComplete: function(){
+                if(this.state.incomplete.length > 1 || this.state.errors.length > 1 ){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
         },
         methods: {
         
@@ -160,5 +183,8 @@
     }
     .nav-pills li {
         width:11vw;
+    }
+    .next-btn{
+        margin-bottom: 15px;
     }
 </style>

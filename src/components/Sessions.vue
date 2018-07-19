@@ -150,8 +150,11 @@
         <br/>
         <div class="row">
             <div class="col-sm-12">
-                <router-link style='float:right' class="btn btn-info" to="/PersonalInformation">
-                    Next <small>(Contact Info)</small>
+                <router-link v-if="state.session" style='float:right' class="btn btn-info next-btn" to="/PersonalInformation">
+                    <span >Next <small>(Contact Info)</small></span>
+                </router-link>
+                <router-link v-else style='float:right' class="btn btn-info next-btn" disabled>
+                    <span><small>Please select a session</small></span>
                 </router-link>
             </div>
         </div>

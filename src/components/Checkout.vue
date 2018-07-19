@@ -7,15 +7,24 @@
             <div class="row">
             </div>
             <div class="credit-card-wrapper"></div>
-            <form id="payment-form" style="width:50%; margin:0 auto;">
+            <form id="payment-form" style="width:65%; margin:0 auto;">
                 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <input placeholder="Card number" type="text" name="number" id="number"
                                v-model="state.ccinfo.number">
                     </div>
-                    <div class="col-sm-6">
-                        <input placeholder="Full name" type="text" name="name" id="name" v-model="state.ccinfo.name">
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input placeholder="First Name" type="text" name="cc-first-name" id="cc-first-name" v-model="state.ccinfo.firstName">
+                    </div>
+                    <div class="col-sm-4">
+                        <input placeholder="Last Name" type="text" name="cc-last-name" id="cc-last-name" v-model="state.ccinfo.lastName">
+                    </div>
+                    <div class="col-sm-4">
+                        <input placeholder="Billing Zip" type="text" name="zip" id="zip" v-model="state.ccinfo.zip">
                     </div>
                 </div>
                 <div class="row">
@@ -32,7 +41,14 @@
                                class="button postfix btn-info">
                     </div>
                 </div>
+                <hr>
+
             </form>
+            <div class="row" style="width:65%; margin:0 auto;">
+                <label for="promoCode">Promo Code: </label>
+                <input v-model="promoCode" class="form-control" id="promoCode" placeholder="If you have a promocode, you may enter it here">
+                <button @click='checkPromoCode' class="btn" style="margin-top:15px">Add Promocode</button>
+            </div>
         </div>
     
     </div>
@@ -40,9 +56,15 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    var card = require("card");
     
     
     export default {
+        data: function () {
+            return {
+                promoCode: '',
+            }
+        },
         computed: {
             ...mapGetters({
                 state: 'getState',
@@ -64,7 +86,7 @@
         mounted: function () {
             var $ = require("jquery");
             window.jQuery = $;
-            var card = require("card");
+            
             var card = new Card({
                 // a selector or DOM element for the form where users will
                 // be entering their information
@@ -103,25 +125,7 @@
         },
         methods: {
             submitPayment() {
-                const authData = {
-                    clientKey: "7vvR9BZ78d772Zqe",
-                    apiLoginID: "37JhUz2c"
-                };
-                
-                let cardData = {
-                    cardNumber: this.state.ccinfo.number,
-                    month: this.state.ccinfo.expiry[0],
-                    year: this.state.ccinfo.expiry[1],
-                    cardCode: this.state.ccinfo.number,
-                };
-                
-                const secureData = {};
-                
-    
-                Accept.dispatchData(secureData, function(response){
-                    console.log(response);
-                });
-                
+                this.$store.commit('sendTransaction');
             },
             showAdult() {
                 this.adultVisible = true;
@@ -152,6 +156,10 @@
                     guestEmail: this.guestEmail,
                     price: 80.00,
                 });
+            },
+            checkPromoCode() {
+
+                this.$store.commit('checkPromoCode', this.promoCode);
             }
         }
     }

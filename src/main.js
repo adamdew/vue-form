@@ -7,13 +7,15 @@ import { store } from './store'
 import VeeValidate from 'vee-validate'
 import VueRouter from 'vue-router'
 import router from './router';
+
 // import GuestTickets from '@/components/GuestTickets'
 
 
 
 Vue.use(Vuex);
 Vue.use(VeeValidate);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
 
 require('../node_modules/bootstrap/dist/css/bootstrap.css')
 /* Adds support for URLSearchParams() in IE*/

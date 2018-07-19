@@ -6,6 +6,7 @@
             <tr>
                 <th><small>Product Name</small></th>
                 <th style="text-align: right"><small>Price</small></th>
+                <th></th>
             </tr>
             <tr v-if="state.session">
                 <td>
@@ -14,6 +15,11 @@
 
                 <td style="text-align: right">
                     <small>${{ selectedSession.price }}</small>
+                </td>
+                <td>
+                    <router-link class="btn btn-sm" to="/Sessions">
+                        Change
+                    </router-link>
                 </td>
             </tr>
             <tr v-if="state.breakoutSession">
@@ -24,6 +30,9 @@
                 <td style="text-align: right">
                     <small>${{ breakoutSession.price }}</small>
                 </td>
+                <td>
+                    <button @click="removeBreakout" class="btn btn-sm">Remove</button>
+                </td>
             </tr>
             <tr v-if="state.yoSeminar">
                 <td>
@@ -32,27 +41,37 @@
                 <td style="text-align: right">
                     <small>${{ yoSeminar.price }}</small>
                 </td>
+                <td>
+                    <button @click="removeYoSeminar" class="btn btn-sm">Remove</button>
+                </td>
             </tr>
             <tr v-for="guestTicket in state.guests">
-                <td>
-                    <small>{{ guestTicket.guestTicketType+" - "+guestTicket.guestName}}</small>
+                <td v-if="guestTicket.degree">
+                    <small>{{ guestTicket.guestTicketType+" - "+guestTicket.firstName+" "+guestTicket.lastName+", "+guestTicket.degree}}</small>
+                </td>
+                <td v-else>
+                    <small>{{ guestTicket.guestTicketType+" - "+guestTicket.firstName+" "+guestTicket.lastName}}</small>
                 </td>
                 <td style="text-align: right">
                     <small>${{ guestTicket.price }}</small>
                 </td>
+                <td>
+                    <button @click="removeGuest(guestTicket)" class="btn btn-sm">Remove</button>
+                </td>
             </tr>
             <tr>
                 <td><h4>Total:</h4></td>
+                <td></td>
                 <td style="text-align: right"><h4>${{ this.subTotal }}</h4></td>
             </tr>
+
         </div>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
-
-
+    
     export default {
         computed: {
             ...mapGetters({
@@ -70,7 +89,7 @@
             guestTotal: function(){
                 let guestTotal = 0;
                 for(let i = 0; i < this.state.guests.length; i++){
-                    guestTotal += this.state.guests[i].price;
+                    guestTotal += parseInt(this.state.guests[i].price);
                 }
                 return guestTotal;
             },
@@ -89,6 +108,15 @@
                     }
                 });
                 return needle;
+            },
+            removeBreakout: function(){
+                this.$store.commit('removeBreakout');
+            },
+            removeYoSeminar: function(){
+                this.$store.commit('removeYoSeminar');
+            },
+            removeGuest: function(guestTicket){
+                this.$store.commit('removeGuest', guestTicket);
             }
         }
     }

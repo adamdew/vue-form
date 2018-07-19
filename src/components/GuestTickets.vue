@@ -15,16 +15,17 @@
                 <br>
                 <form>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="guestName">Name: </label>
-                            <input v-model="guestName" class="form-control" id="guestName" placeholder="Jane Doe">
+                        <div class="form-group col-md-4">
+                            <label for="firstName">First Name: </label>
+                            <input v-model="firstName" class="form-control" id="firstName" placeholder="Jane">
                         </div>
-                        
-                        <div class="form-group col-md-6">
-                            <label for="guestEmail">Email: </label>
-                            <input v-model="guestEmail" type="email" class="form-control" id="guestEmail"
-                                   placeholder="jane.doe@example.com">
-                        
+                        <div class="form-group col-md-4">
+                            <label for="firstName">Last Name: </label>
+                            <input v-model="lastName" class="form-control" id="lastName" placeholder="Doe">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="degree">Degree: </label>
+                            <input v-model="degree" class="form-control" id="degree" placeholder="">
                         </div>
                     </div>
                 
@@ -79,8 +80,9 @@
         data: function () {
             return {
                 adultVisible: true,
-                guestName: '',
-                guestEmail: ''
+                firstName: '',
+                lastName: '',
+                degree: '',
             }
         },
         computed: {
@@ -99,26 +101,47 @@
             addAdultGuestLuncheon(){
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Leadership Luncheon Guest Ticket',
-                    guestName: this.guestName,
-                    guestEmail: this.guestEmail,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    degree: this.degree,
                     price: '100.00',
+                    productID: this.getPriceData('Leadership Luncheon Guest Ticket', 'guest', '(Adult guests may attend, but MUST pre-register for this event.)').PRODUCTID,
                 });
             },
             addAdultGuest(){
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Adult Guest Ticket',
-                    guestName: this.guestName,
-                    guestEmail: this.guestEmail,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    degree: this.degree,
                     price: '80.00',
+                    productID: this.getPriceData('Adult Guest', 'guest', '(Includes 1 badge with unlimited access to exhibit hall on Friday & Saturday and to the Saturday evening reception.)').PRODUCTID,
                 });
             },
             addChildGuest(){
                 this.$store.commit('addGuestTicket', {
                     guestTicketType: 'Child Guest',
-                    guestName: this.guestName,
-                    guestEmail: this.guestEmail,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    degree: this.degree,
                     price: '80.00',
+                    productID: this.getPriceData('Child Guest ', 'guest', '(Includes 1 badge with unlimited access to exhibit hall on Friday & Saturday & access to the Saturday evening reception.)').PRODUCTID,
                 });
+            },
+            getPriceData(name, factor, description) {
+                let product = this.state.priceSheet.priceData.combined.filter(function (data) {
+                    return data.name === name;
+                }).filter(function (data) {
+                    return data.factor === factor;
+                }).filter(function (data) {
+                    return data.description === description;
+                });
+                if (product[0]) {
+                    return product[0];
+                }
+                else {
+                    return 0;
+                }
             }
         }
     }

@@ -12,7 +12,7 @@ const apiConfig = {
         'Content-Type': 'application/x-www-form-urlencoded',
     },
     method: 'post',
-    url: 'https://www.ophmasters.com/registration/reg_api.php',
+    url: 'https://www.ophmasters.com/registration-beta/api/meeting_api.php',
 };
 const usStates = [
     {
@@ -552,21 +552,25 @@ export const store = new Vuex.Store({
         cartTotal: '',
         stateList: usStates,
         countryList: countries,
-        ccinfo : {
+        promoCode: '',
+        promoItems: [],
+        ccinfo: {
             number: '',
-            name: '',
+            firstName: '',
+            lastName: '',
+            zip: '',
             expiry: '',
             cvc: ''
         }
     },
-    plugins:[createPersistedState()],
+    plugins: [createPersistedState()],
     getters: {
         getState(state) {
             return state;
         }
     },
     mutations: {
-        updateState(state, newState){
+        updateState(state, newState) {
             state = newState;
         },
         updatePersonalInfo(state, newState, element) {
@@ -623,6 +627,67 @@ export const store = new Vuex.Store({
         },
         addGuestTicket(state, guest) {
             state.guests.push(guest);
+        },
+        updateErrors(state, errorBag) {
+            state.errors = errorBag;
+        },
+        sendTransaction(state) {
+
+            let toSend = {
+                total: state.cartTotal,
+                session: state.session,
+                breakoutSession: state.breakoutSession,
+                yoSeminar: state.yoSeminar,
+                guestTickets: state.guests,
+                personalInfo: state.personalInfo,
+                ccInfo: state.ccinfo
+            };
+
+            const params = new URLSearchParams();
+            params.append('query', 'makeTransaction');
+            params.append('data', JSON.stringify(toSend));
+
+            apiConfig.data = params;
+            axios(apiConfig).then(
+                response => {
+                    console.log(response.data);
+                }
+            ).catch(
+                error => {
+                    alert(error);
+                }
+            );
+        },
+        checkPromoCode(state, promoCode){
+            state.promoCode = promoCode;
+            const params = new URLSearchParams();
+            params.append('query', 'check_promo');
+            params.append('data', promoCode);
+            apiConfig.data = params;
+            axios(apiConfig).then(
+                response => {
+                    console.log(response.data);
+                }
+            ).catch(
+                error => {
+                    alert(error);
+                }
+            );
+        },
+        removeBreakout(state){
+            this.state.breakoutSession = '';
+        },
+        removeYoSeminar(state){
+            this.state.yoSeminar = '';
+        },
+        removeGuest(state, guestTicket){
+            let filtered = state.guests.filter(function(guest){
+                if(guest != guestTicket){
+                    return guest;
+                }
+            });
+
+            this.state.guests = filtered;
         }
     },
 

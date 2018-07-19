@@ -14,9 +14,10 @@
                 <p><strong>Address:</strong></p>
                 <p>
                     {{ state.personalInfo.address1 }}<br>
-                    {{ state.personalInfo.address2 }}
-                    {{ state.personalInfo.city }}, {{ state.personalInfo.state }} {{ state.personalInfo.zip }} <br>
-                    {{ state.personalInfo.country }}
+                    <!--show hide for non-required element, otherwise linebreak would be automaticly there -->
+                    <span v-if="state.personalInfo.address2">{{ state.personalInfo.address2 }}<br/></span>
+                    {{ state.personalInfo.city }}, {{ state.personalInfo.state.name }} {{ state.personalInfo.zip }} <br>
+                    {{ state.personalInfo.country.name }}
                 </p>
             </div>
         </div>

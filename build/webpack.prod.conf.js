@@ -10,7 +10,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const BabelEnginePlugin = require('babel-engine-plugin')
 
 const env = require('../config/prod.env')
 
@@ -55,8 +54,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         // duplicated CSS from different components can be deduped.
         new OptimizeCSSPlugin({
             cssProcessorOptions: config.build.productionSourceMap
-                ? {safe: true, map: {inline: false}}
-                : {safe: true}
+                ? { safe: true, map: { inline: false } }
+                : { safe: true }
         }),
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
@@ -82,7 +81,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // split vendor js into its own file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks(module) {
+            minChunks (module) {
                 // any required modules inside node_modules are extracted to vendor
                 return (
                     module.resource &&
@@ -116,10 +115,7 @@ const webpackConfig = merge(baseWebpackConfig, {
                 to: config.build.assetsSubDirectory,
                 ignore: ['.*']
             }
-        ]),
-        new BabelEnginePlugin({
-            presets: ['env']
-        })
+        ])
     ]
 })
 
