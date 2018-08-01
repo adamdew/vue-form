@@ -6,11 +6,11 @@
                 <div class="form-section-body">
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            <label for="first-name">First Name</label>
+                            <label for="first-name">First Name*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.firstName"
-                                @keyup="updateState"
+                                @keyup="updateState('firstName')"
                                 class="form-control"
                                 id="first-name"
                                 name="first-name"
@@ -38,11 +38,11 @@
                             </div>
                         </div>
                         <div class="col-sm-4 form-group">
-                            <label for="last-name">Last Name</label>
+                            <label for="last-name">Last Name*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.lastName"
-                                @keyup="updateState"
+                                @keyup="updateState('lastName')"
                                 class="form-control"
                                 id="last-name"
                                 name="last-name"
@@ -56,7 +56,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6 form-group">
-                            <label for="degree">Degree</label>
+                            <label for="degree">Degree*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.degree"
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6 form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.email"
@@ -109,7 +109,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for="address1">Street Line 1</label>
+                            <label for="address1">Street Line 1*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.address1"
@@ -144,7 +144,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for="city">City</label>
+                            <label for="city">City*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.city"
@@ -163,7 +163,7 @@
                     <div class="row">
                         <div class="col-sm-6 ">
                             <div class="form-group">
-                                <label for="state">State</label>
+                                <label for="state">State*</label>
                                 <v-select
                                     id="state"
                                     name="state"
@@ -180,7 +180,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="country">Country</label>
+                                <label for="country">Country*</label>
                                 <v-select
                                     id="country"
                                     name="country"
@@ -198,7 +198,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for="zip">Zip</label>
+                            <label for="zip">Zip*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.zip"
@@ -216,7 +216,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">Phone*</label>
                             <input
                                 type="text"
                                 v-model="state.personalInfo.phone"
@@ -265,8 +265,9 @@
         },
         methods: {
             updateState(exp) {
+
                 this.$store.commit('updatePersonalInfo', this.state, exp);
-                // this.$store.commit('fieldCompleted', exp);
+
             },
         },
         watch: {

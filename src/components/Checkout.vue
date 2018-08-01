@@ -125,7 +125,19 @@
         },
         methods: {
             submitPayment() {
-                this.$store.commit('sendTransaction');
+                // let message = '';
+                // for(let i = 0; i < this.state.incomplete.length; i++){
+                //     let key = this.state.incomplete[i];
+                //     if(this.state.personalInfo[key] == ''){
+                //         message += key+" is empty<br>";
+                //     }
+                // }
+                // if(message != ''){
+                //     console.log(message);
+                // }
+                // else{
+                    this.$store.commit('sendTransaction');
+                //}
             },
             showAdult() {
                 this.adultVisible = true;

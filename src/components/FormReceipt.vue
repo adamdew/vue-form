@@ -8,13 +8,13 @@
                 <th style="text-align: right"><small>Price</small></th>
                 <th></th>
             </tr>
-            <tr v-if="state.session">
+            <tr v-for="productID in state.sessions">
                 <td>
-                    <small>{{ selectedSession.name }} - {{selectedSession.factor}}</small>
+                    <small>{{ selectedSession(productID).name }} - {{selectedSession(productID).factor}}</small>
                 </td>
 
                 <td style="text-align: right">
-                    <small>${{ selectedSession.price }}</small>
+                    <small>${{ selectedSession(productID).price }}</small>
                 </td>
                 <td>
                     <router-link class="btn btn-sm" to="/Sessions">
@@ -26,7 +26,6 @@
                 <td>
                     <small>{{ breakoutSession.name+" - "+breakoutSession.description}}</small>
                 </td>
-
                 <td style="text-align: right">
                     <small>${{ breakoutSession.price }}</small>
                 </td>
@@ -77,9 +76,7 @@
             ...mapGetters({
                 state: 'getState',
             }),
-            selectedSession: function(){
-                return this.getProduct(this.state.session);
-            },
+
             breakoutSession: function(){
                 return this.getProduct(this.state.breakoutSession);
             },
@@ -94,12 +91,21 @@
                 return guestTotal;
             },
             subTotal: function (){
-                let subTotal = parseInt(this.selectedSession.price) + parseInt(this.guestTotal);
+
+                let sessionTotal = 0;
+                for(let i = 0; i < this.state.sessions.length; i++){
+                    sessionTotal += parseInt(this.getProduct(this.state.sessions[i]).price);
+                }
+                let subTotal = sessionTotal + parseInt(this.guestTotal);
                 this.state.cartTotal = subTotal;
                 return subTotal.toFixed(2);
+
             }
         },
         methods: {
+            selectedSession: function(session){
+                return this.getProduct(session);
+            },
             getProduct: function(PRODUCTID){
                 let needle = '';
                 this.state.priceSheet.priceData.combined.filter((product) => {

@@ -545,7 +545,7 @@ export const store = new Vuex.Store({
             fieldRequirement: false,
             itemRequirement: false
         },
-        session: '',
+        sessions: [],
         breakoutSession: '',
         yoSeminar: '',
         guests: [],
@@ -575,6 +575,12 @@ export const store = new Vuex.Store({
         },
         updatePersonalInfo(state, newState, element) {
             state.personalInfo[element] = newState.personalInfo[element];
+
+            // let found = state.incomplete.find(function(field) {
+            //
+            // });
+
+            //console.log(found);
         },
         setErrors(state, error) {
             if (!search(error.name, state.errors)) {
@@ -624,6 +630,7 @@ export const store = new Vuex.Store({
             state.incomplete = state.incomplete.filter(function (item) {
                 return item !== name
             });
+
         },
         addGuestTicket(state, guest) {
             state.guests.push(guest);
@@ -635,7 +642,7 @@ export const store = new Vuex.Store({
 
             let toSend = {
                 total: state.cartTotal,
-                session: state.session,
+                sessions: state.sessions,
                 breakoutSession: state.breakoutSession,
                 yoSeminar: state.yoSeminar,
                 guestTickets: state.guests,

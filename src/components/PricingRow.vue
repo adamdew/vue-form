@@ -6,10 +6,10 @@
         <td>
             <input
                 class="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="registration"
                 :value="earlyBird.PRODUCTID"
-                v-model="state.session"
+                v-model="state.sessions"
                 @change="updateState()">
         </td>
     </tr>
@@ -20,10 +20,10 @@
         <td>
             <input
                 class="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="registration"
                 :value="regular.PRODUCTID"
-                v-model="state.session"
+                v-model="state.sessions"
                 @change="updateState()">
         </td>
     </tr>

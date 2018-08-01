@@ -113,7 +113,7 @@
                 }
             },
             sessionIsSet: function () {
-                if (!this.state.session) {
+                if (this.state.sessions.length == 0) {
                     return false;
                 }
                 else {

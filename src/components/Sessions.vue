@@ -12,8 +12,8 @@
                     </tr>
                     </thead>
                     <PricingRow
-                        name="Scientific Sessions"
-                        factor="FSO Member"
+                            name="Scientific Sessions"
+                            factor="FSO Member"
                     ></PricingRow>
                     <PricingRow
                             name="Scientific Sessions"
@@ -24,8 +24,8 @@
                             factor="Ophthalmic Nurse"
                     ></PricingRow>
                     <!--<PricingRow-->
-                            <!--name="Scientific Sessions"-->
-                            <!--factor="In-Training"-->
+                    <!--name="Scientific Sessions"-->
+                    <!--factor="In-Training"-->
                     <!--&gt;</PricingRow>-->
                     <tr>
                         <th>Office Administrator Program<br/>(Saturday, June 9)</th>
@@ -121,7 +121,8 @@
                 </div>
                 <br/>
                 <h5>Young Ophthalmologist (YO) Seminar (Saturday, June 9 | 4:00-6:00 PM)</h5>
-                <p>This program is for YOs and will cover important topics such as practice building, work-life balance, management of medical-legal issues and personal finance.
+                <p>This program is for YOs and will cover important topics such as practice building, work-life balance,
+                    management of medical-legal issues and personal finance.
                 </p>
                 <div class="checkbox">
                     <label>
@@ -150,8 +151,9 @@
         <br/>
         <div class="row">
             <div class="col-sm-12">
-                <router-link v-if="state.session" style='float:right' class="btn btn-info next-btn" to="/PersonalInformation">
-                    <span >Next <small>(Contact Info)</small></span>
+                <router-link v-if="state.sessions.length > 0" style='float:right' class="btn btn-info next-btn"
+                             to="/PersonalInformation">
+                    <span>Next <small>(Contact Info)</small></span>
                 </router-link>
                 <router-link v-else style='float:right' class="btn btn-info next-btn" disabled>
                     <span><small>Please select a session</small></span>
@@ -159,14 +161,14 @@
             </div>
         </div>
     </div>
-    
+
 </template>
 <script>
 
     import {mapGetters} from 'vuex';
     import FormReceipt from './FormReceipt'
     import PricingRow from './PricingRow'
-    
+
 
     export default {
         computed: {
@@ -211,7 +213,7 @@
                     return 0;
                 }
             },
-            updateState(){
+            updateState() {
                 this.$store.commit('updateState', this.state);
             }
         }
